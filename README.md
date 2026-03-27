@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # SmorX.ai — Full-Stack AI Company Website
 
 A production-ready website for SmorX.ai built with React + Vite (frontend) and Django REST Framework (backend).
@@ -188,3 +189,7 @@ gunicorn smorx.wsgi:application --bind 0.0.0.0:8000
 | CORS | django-cors-headers |
 | Config | python-decouple |
 | Database | SQLite (dev) / PostgreSQL (prod) |
+=======
+# SmorX.ai
+Company Website
+>>>>>>> d99e0a7567537ad157019e3dc1913af722ce6039
