@@ -103,7 +103,7 @@ export default function Navbar() {
                 <ArrowRight className="w-3 h-3" aria-hidden="true" />
               </a>
               <button
-                className="lg:hidden p-2 rounded-lg text-white/60 hover:text-white hover:bg-white/[0.06] transition-colors"
+                className="lg:hidden p-2.5 rounded-lg text-white/60 hover:text-white hover:bg-white/[0.06] transition-colors min-w-[44px] min-h-[44px] flex items-center justify-center"
                 onClick={() => setMobileOpen(!mobileOpen)}
                 aria-expanded={mobileOpen}
                 aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
@@ -127,7 +127,7 @@ export default function Navbar() {
                 key={label}
                 href={href}
                 onClick={(e) => handleNavClick(e, href)}
-                className="flex items-center px-3 py-3 rounded-lg text-sm text-white/60 hover:text-white hover:bg-white/[0.06] transition-all"
+                className="flex items-center px-3 py-3.5 rounded-lg text-sm text-white/60 hover:text-white hover:bg-white/[0.06] transition-all min-h-[44px]"
               >
                 {label}
               </a>

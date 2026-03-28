@@ -18,7 +18,7 @@ const TESTIMONIALS = [
     avatar: 'MW',
     avatarGradient: 'from-purple-500 to-indigo-400',
     rating: 5,
-    text: "We deployed their AI chatbot across 12 markets and saw a 3x increase in customer satisfaction scores within 60 days. The ROI has been incredible — highly recommend.",
+    text: "We deployed their AI chatbot across 12 markets and saw a 3x increase in customer satisfaction scores within 60 days. The ROI has been incredible. Highly recommend.",
     highlight: '3x satisfaction increase',
   },
   {
@@ -53,7 +53,7 @@ export default function Trust() {
     <section
       id="trust"
       ref={sectionRef}
-      className="relative py-28 bg-dark overflow-hidden"
+      className="relative py-16 sm:py-20 lg:py-28 bg-dark overflow-hidden"
       aria-label="Client testimonials"
     >
       <div className="divider-x absolute top-0 inset-x-0" aria-hidden="true" />

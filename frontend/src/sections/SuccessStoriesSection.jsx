@@ -121,7 +121,7 @@ export default function SuccessStoriesSection() {
     <section
       id="success-stories"
       ref={sectionRef}
-      className="relative py-28 bg-dark overflow-hidden"
+      className="relative py-16 sm:py-20 lg:py-28 bg-dark overflow-hidden"
       aria-label="Success stories"
     >
       {/* Background accents */}
@@ -141,7 +141,7 @@ export default function SuccessStoriesSection() {
             <span className="gradient-text">Stories</span>
           </h2>
           <p className="section-subheading">
-            Real-world applications of our AI solutions across industries — measured impact, proven results.
+            Real world applications of our AI solutions across industries. Measured impact, proven results.
           </p>
         </div>
 
@@ -159,7 +159,7 @@ export default function SuccessStoriesSection() {
               >
                 {/* Image area — rich gradient with icon */}
                 <div
-                  className="relative h-48 w-full overflow-hidden flex items-center justify-center"
+                  className="relative h-36 sm:h-44 md:h-48 w-full overflow-hidden flex items-center justify-center"
                   style={{
                     background: `linear-gradient(135deg, ${story.gradientFrom}, ${story.gradientTo})`,
                   }}

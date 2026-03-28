@@ -68,7 +68,7 @@ export default function AIServicesSection() {
     <section
       id="services"
       ref={sectionRef}
-      className="relative py-16 md:py-24 bg-dark overflow-hidden"
+      className="relative py-14 sm:py-16 md:py-24 bg-dark overflow-hidden"
       aria-label="AI Services"
     >
       {/* Background accents */}

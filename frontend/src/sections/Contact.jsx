@@ -100,7 +100,7 @@ export default function Contact() {
     <section
       id="contact"
       ref={sectionRef}
-      className="relative py-28 bg-[#0D1120] overflow-hidden"
+      className="relative py-16 sm:py-20 lg:py-28 bg-[#0D1120] overflow-hidden"
       aria-label="Contact section"
     >
       <div className="divider-x absolute top-0 inset-x-0" aria-hidden="true" />
@@ -161,7 +161,7 @@ export default function Contact() {
 
           {/* Form */}
           <div className="lg:col-span-3 animate-on-scroll animation-delay-200">
-            <div className="glass-card rounded-2xl p-8 border border-white/[0.07]">
+            <div className="glass-card rounded-2xl p-5 sm:p-8 border border-white/[0.07]">
 
               {status === 'success' ? (
                 <div className="text-center py-10" role="alert" aria-live="polite">

@@ -88,7 +88,7 @@ export default function Services() {
     <section
       id="services"
       ref={sectionRef}
-      className="relative py-28 bg-dark overflow-hidden"
+      className="relative py-16 sm:py-20 lg:py-28 bg-dark overflow-hidden"
       aria-label="Services section"
     >
       {/* Background accents */}
@@ -98,7 +98,7 @@ export default function Services() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* Header */}
-        <div className="text-center mb-20 animate-on-scroll">
+        <div className="text-center mb-10 sm:mb-14 lg:mb-20 animate-on-scroll">
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-purple/10 border border-purple/20 text-purple-light text-xs font-medium mb-4">
             <span>What We Offer</span>
           </div>

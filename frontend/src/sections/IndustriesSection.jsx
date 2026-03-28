@@ -81,7 +81,7 @@ export default function IndustriesSection() {
     <section
       id="industries"
       ref={sectionRef}
-      className="relative py-28 bg-dark-100 overflow-hidden"
+      className="relative py-16 sm:py-20 lg:py-28 bg-dark-100 overflow-hidden"
       aria-label="Industries we serve"
     >
       {/* Background accents */}
@@ -107,7 +107,7 @@ export default function IndustriesSection() {
         </div>
 
         {/* Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
           {INDUSTRIES.map((industry, i) => {
             const Icon = industry.icon
             return (

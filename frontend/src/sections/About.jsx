@@ -11,7 +11,7 @@ const PILLARS = [
   {
     icon: Target,
     title: 'Our Mission',
-    body: 'To make transformative AI accessible and practical for every organization — turning complex models into tangible business outcomes that drive growth, efficiency, and innovation.',
+    body: 'To make transformative AI accessible and practical for every organization, turning complex models into tangible business outcomes that drive growth, efficiency, and innovation.',
     iconColor: 'text-primary',
     iconBg: 'bg-primary/10',
     hoverBorder: 'hover:border-primary/25',
@@ -19,7 +19,7 @@ const PILLARS = [
   {
     icon: Eye,
     title: 'Our Vision',
-    body: 'A world where intelligent systems augment human potential — empowering individuals and organizations to achieve what was previously impossible through responsible, human centered AI.',
+    body: 'A world where intelligent systems augment human potential, empowering individuals and organizations to achieve what was previously impossible through responsible, human centered AI.',
     iconColor: 'text-purple-400',
     iconBg: 'bg-purple/10',
     hoverBorder: 'hover:border-purple/25',
@@ -27,7 +27,7 @@ const PILLARS = [
   {
     icon: Zap,
     title: 'Our Approach',
-    body: 'We combine state of the art research with pragmatic engineering — building AI solutions that are fast, reliable, explainable, and deeply integrated with your existing workflows.',
+    body: 'We combine state of the art research with pragmatic engineering, building AI solutions that are fast, reliable, explainable, and deeply integrated with your existing workflows.',
     iconColor: 'text-accent',
     iconBg: 'bg-accent/10',
     hoverBorder: 'hover:border-accent/25',
@@ -55,11 +55,11 @@ export default function About() {
     <section
       id="about"
       ref={sectionRef}
-      className="relative py-28 bg-[#0D1120] overflow-hidden"
+      className="relative py-16 sm:py-20 lg:py-28 bg-[#0D1120] overflow-hidden"
       aria-label="About section"
     >
       <div className="divider-x absolute top-0 inset-x-0" aria-hidden="true" />
-      <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-primary/5 rounded-full blur-3xl pointer-events-none" aria-hidden="true" />
+      <div className="absolute bottom-0 left-0 w-64 sm:w-96 lg:w-[500px] h-64 sm:h-96 lg:h-[500px] bg-primary/5 rounded-full blur-3xl pointer-events-none" aria-hidden="true" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
@@ -75,7 +75,7 @@ export default function About() {
         </div>
 
         {/* 2-col layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start mb-20">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-start mb-10 lg:mb-20">
 
           {/* Left */}
           <div className="animate-on-scroll space-y-5">
