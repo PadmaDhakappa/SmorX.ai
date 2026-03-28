@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react'
-import { Car, Plane, Factory, Heart, Landmark, ShoppingCart, Zap, Shield } from 'lucide-react'
+import { Car, Plane, Factory, Heart, Users, ShoppingCart, Zap, Shield } from 'lucide-react'
 
 const INDUSTRIES = [
   {
@@ -31,15 +31,15 @@ const INDUSTRIES = [
     iconColor: 'text-rose-400',
   },
   {
-    icon: Landmark,
-    title: 'Financial Services',
-    description: 'Risk assessment, fraud detection, and algorithmic trading',
+    icon: Users,
+    title: 'Staffing & Workforce Solutions',
+    description: 'AI driven talent intelligence, workforce optimization, and recruitment automation to help organizations identify, deploy, and manage talent more efficiently at scale.',
     gradient: 'from-emerald-500/20 to-green-400/10',
     iconColor: 'text-emerald-400',
   },
   {
     icon: ShoppingCart,
-    title: 'Retail & E-commerce',
+    title: 'Retail & E commerce',
     description: 'Personalization, inventory management, and customer insights',
     gradient: 'from-orange-500/20 to-accent/10',
     iconColor: 'text-accent',

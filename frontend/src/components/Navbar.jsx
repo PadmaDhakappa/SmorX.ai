@@ -41,21 +41,8 @@ export default function Navbar() {
 
   return (
     <>
-      {/* Announcement bar */}
-      <div className="fixed top-0 left-0 right-0 z-[60] bg-gradient-to-r from-purple/80 via-primary/80 to-purple/80 backdrop-blur-sm py-1.5 px-4 text-center">
-        <p className="text-xs text-white/90 font-medium truncate">
-          🚀 <span className="hidden sm:inline">Introducing SmorX Agent 2.0 — our most powerful AI yet. </span>
-          <button
-            onClick={(e) => handleNavClick(e, '#contact')}
-            className="underline underline-offset-2 hover:text-white transition-colors font-semibold"
-          >
-            Learn more →
-          </button>
-        </p>
-      </div>
-
       <nav
-        className={`fixed top-[30px] left-0 right-0 z-50 transition-all duration-500 ${
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
           scrolled
             ? 'bg-[#0B0F1A]/85 backdrop-blur-2xl border-b border-white/[0.06] shadow-xl shadow-black/30'
             : 'bg-transparent'

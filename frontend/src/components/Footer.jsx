@@ -88,7 +88,7 @@ export default function Footer() {
                 <LogoText className="text-lg" />
               </a>
               <p className="text-white/40 text-sm leading-relaxed mb-6 max-w-xs">
-                Building the intelligent infrastructure of tomorrow — one model at a time.
+                Building the intelligent infrastructure of tomorrow, one model at a time.
               </p>
               <div className="flex items-center gap-2">
                 {SOCIALS.map(({ icon: Icon, label, href }) => (

@@ -15,7 +15,7 @@ const SERVICES = [
   {
     icon: Brain,
     title: 'Machine Learning',
-    description: 'Custom ML models trained on your data to predict outcomes, identify patterns, and power smart decision-making.',
+    description: 'Custom ML models trained on your data to predict outcomes, identify patterns, and power smart decision making.',
     gradient: 'from-purple/20 to-indigo/20',
     iconColor: 'text-purple-light',
     iconBg: 'bg-purple/10',
@@ -25,7 +25,7 @@ const SERVICES = [
   {
     icon: MessageSquare,
     title: 'AI Chatbots',
-    description: 'Conversational AI that understands context, handles complex queries, and delivers human-like interactions 24/7.',
+    description: 'Conversational AI that understands context, handles complex queries, and delivers human like interactions 24/7.',
     gradient: 'from-indigo/20 to-purple/20',
     iconColor: 'text-indigo-400',
     iconBg: 'bg-indigo/10',
@@ -35,7 +35,7 @@ const SERVICES = [
   {
     icon: BarChart3,
     title: 'Data Analytics',
-    description: 'Transform raw data into actionable insights with AI-powered analytics dashboards and predictive reporting.',
+    description: 'Transform raw data into actionable insights with AI powered analytics dashboards and predictive reporting.',
     gradient: 'from-green-500/20 to-emerald-500/20',
     iconColor: 'text-emerald-400',
     iconBg: 'bg-emerald-500/10',
@@ -45,7 +45,7 @@ const SERVICES = [
   {
     icon: Shield,
     title: 'AI Security',
-    description: 'Protect your systems with AI-driven threat detection, anomaly detection, and real-time security monitoring.',
+    description: 'Protect your systems with AI driven threat detection, anomaly detection, and real time security monitoring.',
     gradient: 'from-orange-500/20 to-accent/20',
     iconColor: 'text-accent',
     iconBg: 'bg-accent/10',

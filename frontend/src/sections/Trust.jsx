@@ -9,7 +9,7 @@ const TESTIMONIALS = [
     avatar: 'SC',
     avatarGradient: 'from-blue-500 to-cyan-400',
     rating: 5,
-    text: "SmorX.ai's ML models reduced our fraud detection time by 87%. Their team's expertise and support throughout integration was exceptional. Truly a game-changer for our operations.",
+    text: "SmorX.ai's ML models reduced our fraud detection time by 87%. Their team's expertise and support throughout integration was exceptional. Truly a game changer for our operations.",
     highlight: '87% faster detection',
   },
   {
@@ -143,7 +143,7 @@ export default function Trust() {
               </div>
               <div className="hidden sm:block w-px h-8 bg-white/10" aria-hidden="true" />
               <p className="text-white/40 text-sm text-center sm:text-left">
-                Based on <span className="text-white/70 font-medium">240+</span> verified client reviews
+                Based on <span className="text-white/70 font-medium">50+</span> verified client reviews
               </p>
             </div>
           </div>

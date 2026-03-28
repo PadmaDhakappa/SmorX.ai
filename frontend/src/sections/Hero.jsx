@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { ArrowRight, Sparkles, ChevronDown } from 'lucide-react'
 
-const ANIMATED_WORDS = ['Intelligent', 'Innovative', 'Transformative', 'Autonomous', 'Next-Gen']
+const ANIMATED_WORDS = ['Intelligent', 'Innovative', 'Transformative', 'Autonomous']
 
 export default function Hero() {
   const [wordIndex, setWordIndex] = useState(0)
@@ -54,7 +54,7 @@ export default function Hero() {
 
         {/* Headline */}
         <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-heading leading-[1.1] mb-5 sm:mb-6 text-balance">
-          <span className="block text-white">Next-Generation</span>
+          <span className="block text-white">Next Generation</span>
           <span className="block mt-1 sm:mt-1.5">
             <span
               className={`gradient-text transition-opacity duration-300 ${visible ? 'opacity-100' : 'opacity-0'}`}
@@ -69,8 +69,7 @@ export default function Hero() {
 
         {/* Subtext */}
         <p className="text-sm sm:text-base md:text-lg text-white/55 max-w-xl sm:max-w-2xl mx-auto mb-8 sm:mb-10 leading-relaxed">
-          Transforming industries through cutting-edge AI, machine learning, and automation.
-          We build intelligent systems that drive measurable, real-world results.
+          We build AI systems that automate decisions, optimize operations, and deliver measurable business outcomes.
         </p>
 
         {/* CTA Buttons */}
@@ -95,9 +94,9 @@ export default function Hero() {
         {/* Stats strip */}
         <div className="flex items-center justify-center">
           {[
-            { value: '500+', label: 'AI Models' },
+            { value: '100+', label: 'AI Models' },
             { value: '99.9%', label: 'Uptime SLA' },
-            { value: '150+', label: 'Clients' },
+            { value: '50+', label: 'Clients' },
           ].map(({ value, label }, i) => (
             <div key={label} className="flex items-center">
               <div className="px-4 sm:px-6 text-center">

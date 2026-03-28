@@ -1,12 +1,10 @@
 import { useEffect, useRef } from 'react'
-import { Target, Eye, Zap, Users, Globe, Award } from 'lucide-react'
+import { Target, Eye, Zap, Users, Globe } from 'lucide-react'
 import LogoText from '../components/LogoText'
 
 const STATS = [
-  { icon: Users, value: '150+', label: 'Enterprise Clients', color: 'text-primary', bg: 'bg-primary/10' },
-  { icon: Globe, value: '30+', label: 'Countries Reached', color: 'text-purple-400', bg: 'bg-purple/10' },
-  { icon: Award, value: '50+', label: 'AI Patents Filed', color: 'text-accent', bg: 'bg-accent/10' },
-  { icon: Zap, value: '1B+', label: 'Predictions Daily', color: 'text-emerald-400', bg: 'bg-emerald-500/10' },
+  { icon: Users, value: '50+', label: 'Clients', color: 'text-primary', bg: 'bg-primary/10' },
+  { icon: Globe, value: '10+', label: 'Countries', color: 'text-purple-400', bg: 'bg-purple/10' },
 ]
 
 const PILLARS = [
@@ -21,7 +19,7 @@ const PILLARS = [
   {
     icon: Eye,
     title: 'Our Vision',
-    body: 'A world where intelligent systems augment human potential — empowering individuals and organizations to achieve what was previously impossible through responsible, human-centered AI.',
+    body: 'A world where intelligent systems augment human potential — empowering individuals and organizations to achieve what was previously impossible through responsible, human centered AI.',
     iconColor: 'text-purple-400',
     iconBg: 'bg-purple/10',
     hoverBorder: 'hover:border-purple/25',
@@ -29,7 +27,7 @@ const PILLARS = [
   {
     icon: Zap,
     title: 'Our Approach',
-    body: 'We combine state-of-the-art research with pragmatic engineering — building AI solutions that are fast, reliable, explainable, and deeply integrated with your existing workflows.',
+    body: 'We combine state of the art research with pragmatic engineering — building AI solutions that are fast, reliable, explainable, and deeply integrated with your existing workflows.',
     iconColor: 'text-accent',
     iconBg: 'bg-accent/10',
     hoverBorder: 'hover:border-accent/25',
@@ -82,13 +80,13 @@ export default function About() {
           {/* Left */}
           <div className="animate-on-scroll space-y-5">
             <p className="text-white/80 text-lg leading-relaxed font-medium">
-              Founded in 2020, <LogoText /> is a pioneering AI company on a mission to democratize artificial intelligence for businesses of all sizes.
+              Founded in 2025, <LogoText /> is a pioneering AI company on a mission to democratize artificial intelligence for businesses of all sizes.
             </p>
             <p className="text-white/50 leading-relaxed">
-              We combine deep research expertise with production-grade engineering to deliver AI systems that are not only powerful — but reliable, explainable, and built for scale. Our team of 80+ AI researchers, engineers, and domain experts works at the frontier of what's possible.
+              We combine deep research expertise with production-grade engineering to deliver AI systems that are not only powerful but reliable, explainable, and built for scale. Our team of 30+ AI researchers, engineers, and domain experts works at the frontier of what's possible.
             </p>
             <p className="text-white/50 leading-relaxed">
-              From Fortune 500 enterprises to fast-growing startups, our clients trust <LogoText /> to be their strategic AI partner — accelerating innovation and creating lasting competitive advantages.
+              From Fortune 500 enterprises to fast-growing startups, our clients trust <LogoText /> to be their strategic AI partner, accelerating innovation and creating lasting competitive advantages.
             </p>
 
             <div className="flex flex-wrap gap-3 pt-3">
@@ -129,7 +127,7 @@ export default function About() {
         </div>
 
         {/* Stats */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 animate-on-scroll animation-delay-300">
+        <div className="grid grid-cols-2 gap-4 max-w-lg mx-auto w-full animate-on-scroll animation-delay-300">
           {STATS.map(({ icon: Icon, value, label, color, bg }) => (
             <div
               key={label}

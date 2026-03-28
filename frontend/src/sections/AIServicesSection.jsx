@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react'
-import { Cpu, Brain, MessageSquare, BarChart3, Shield, Bot } from 'lucide-react'
+import { Cpu, BarChart3, Shield, Bot } from 'lucide-react'
 
 const SERVICES = [
   {
@@ -13,32 +13,10 @@ const SERVICES = [
     glowHover: 'hover:shadow-blue-500/10',
   },
   {
-    icon: Brain,
-    title: 'Machine Learning',
-    description:
-      'Custom ML models trained on your data to predict outcomes, identify patterns, and power smart decision-making.',
-    iconBg: 'bg-purple-500/10',
-    iconColor: 'text-purple-400',
-    borderHover: 'hover:border-purple-500/40',
-    glowHover: 'hover:shadow-purple-500/10',
-    linkColor: 'hover:text-purple-400',
-  },
-  {
-    icon: MessageSquare,
-    title: 'AI Chatbots',
-    description:
-      'Conversational AI that understands context, handles complex queries, and delivers human-like interactions 24/7.',
-    iconBg: 'bg-indigo-500/10',
-    iconColor: 'text-indigo-400',
-    borderHover: 'hover:border-indigo-500/40',
-    glowHover: 'hover:shadow-indigo-500/10',
-    linkColor: 'hover:text-indigo-400',
-  },
-  {
     icon: BarChart3,
     title: 'Data Analytics',
     description:
-      'Transform raw data into actionable insights with AI-powered analytics dashboards and predictive reporting.',
+      'Transform raw data into actionable insights with AI powered analytics dashboards and predictive reporting.',
     iconBg: 'bg-emerald-500/10',
     iconColor: 'text-emerald-400',
     borderHover: 'hover:border-emerald-500/40',
@@ -49,7 +27,7 @@ const SERVICES = [
     icon: Shield,
     title: 'AI Security',
     description:
-      'Protect your systems with AI-driven threat detection, anomaly detection, and real-time security monitoring.',
+      'Protect your systems with AI driven threat detection, anomaly detection, and real time security monitoring.',
     iconBg: 'bg-orange-500/10',
     iconColor: 'text-orange-400',
     borderHover: 'hover:border-orange-500/40',
@@ -127,7 +105,7 @@ export default function AIServicesSection() {
         </div>
 
         {/* Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8 max-w-4xl mx-auto">
           {SERVICES.map((service, i) => {
             const Icon = service.icon
             return (

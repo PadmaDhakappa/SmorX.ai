@@ -5,7 +5,7 @@ const STORIES = [
   {
     title: 'Smart Manufacturing',
     description:
-      'Implemented AI-driven quality control system resulting in 40% reduction in defects and 25% increase in production efficiency.',
+      'Implemented AI driven quality control system resulting in 40% reduction in defects and 25% increase in production efficiency.',
     category: 'Manufacturing',
     categoryColor: 'text-blue-400 bg-blue-400/10 border-blue-400/20',
     Icon: Factory,
@@ -21,7 +21,7 @@ const STORIES = [
   {
     title: 'Healthcare Diagnostics',
     description:
-      'Developed AI-powered diagnostic system that improved accuracy by 35% and reduced diagnosis time by 60%.',
+      'Developed AI powered diagnostic system that improved accuracy by 35% and reduced diagnosis time by 60%.',
     category: 'Healthcare',
     categoryColor: 'text-rose-400 bg-rose-400/10 border-rose-400/20',
     Icon: Heart,
@@ -53,7 +53,7 @@ const STORIES = [
   {
     title: 'Autonomous Systems',
     description:
-      'Developed self-driving algorithms that achieved 99.9% safety rating in controlled test environments.',
+      'Developed self driving algorithms that achieved 99.9% safety rating in controlled test environments.',
     category: 'Automotive',
     categoryColor: 'text-purple-400 bg-purple-400/10 border-purple-400/20',
     Icon: Car,
