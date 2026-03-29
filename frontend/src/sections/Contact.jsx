@@ -77,7 +77,8 @@ export default function Contact() {
     if (Object.keys(errs).length > 0) { setErrors(errs); return }
     setStatus('loading')
     try {
-      await axios.post('/api/contact/', form)
+      const API_BASE = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000'
+      await axios.post(`${API_BASE}/api/contact/`, form)
       setStatus('success')
       setForm(INITIAL_FORM)
       setErrors({})
