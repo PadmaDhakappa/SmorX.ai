@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from 'react'
 import { Send, CheckCircle, AlertCircle, Mail, MapPin, Phone, Loader2, ArrowRight } from 'lucide-react'
 import axios from 'axios'
 
-const INITIAL_FORM = { name: '', email: '', message: '' }
+const INITIAL_FORM = { name: '', email: '', phone: '', message: '' }
 
 const CONTACT_INFO = [
   {
@@ -218,6 +218,20 @@ export default function Contact() {
                         </p>
                       )}
                     </div>
+                  </div>
+
+                  {/* Phone */}
+                  <div className="mb-4">
+                    <label htmlFor="phone" className="block text-xs font-medium text-white/50 uppercase tracking-wider mb-2">
+                      Phone Number <span className="text-white/25 normal-case tracking-normal">(optional)</span>
+                    </label>
+                    <input
+                      id="phone" name="phone" type="tel"
+                      value={form.phone} onChange={handleChange}
+                      placeholder="+91 98765 43210"
+                      autoComplete="tel"
+                      className={inputClass('phone')}
+                    />
                   </div>
 
                   {/* Message */}

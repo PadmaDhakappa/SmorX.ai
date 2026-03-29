@@ -14,6 +14,7 @@ class ContactMessage(models.Model):
 
     name = models.CharField(max_length=150)
     email = models.EmailField()
+    phone = models.CharField(max_length=30, blank=True, default='')
     message = models.TextField()
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='new')
     ip_address = models.GenericIPAddressField(null=True, blank=True)

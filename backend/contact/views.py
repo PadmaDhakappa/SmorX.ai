@@ -19,8 +19,9 @@ def get_client_ip(request):
     return request.META.get('REMOTE_ADDR')
 
 
-def send_contact_email(name, email, message):
+def send_contact_email(name, email, phone, message):
     subject = "New Contact Form Submission - SmorX.ai"
+    phone_line = f"  Phone       : {phone}" if phone else "  Phone       : —"
     body = f"""
 You have received a new message via the SmorX.ai contact form.
 
@@ -29,6 +30,7 @@ You have received a new message via the SmorX.ai contact form.
 ─────────────────────────────────────
   Full Name   : {name}
   Email       : {email}
+{phone_line}
 ─────────────────────────────────────
   MESSAGE
 ─────────────────────────────────────
@@ -65,6 +67,7 @@ class ContactAPIView(APIView):
             send_contact_email(
                 name=serializer.validated_data['name'],
                 email=serializer.validated_data['email'],
+                phone=serializer.validated_data.get('phone', ''),
                 message=serializer.validated_data['message'],
             )
             return Response(
