@@ -76,8 +76,7 @@ export default function Contact() {
     if (Object.keys(errs).length > 0) { setErrors(errs); return }
     setStatus('loading')
     try {
-      const API_BASE = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000'
-      const res = await fetch(`${API_BASE}/api/contact/`, {
+      const res = await fetch('https://smorx-backend.onrender.com/api/contact/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(form),
