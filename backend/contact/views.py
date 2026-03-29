@@ -1,13 +1,15 @@
 import logging
+import resend
+from decouple import config
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.throttling import AnonRateThrottle
-from django.core.mail import send_mail
-from django.conf import settings
 
 from .models import ContactMessage
 from .serializers import ContactMessageSerializer
+
+resend.api_key = config("RESEND_API_KEY")
 
 logger = logging.getLogger(__name__)
 
@@ -20,37 +22,20 @@ def get_client_ip(request):
 
 
 def send_contact_email(name, email, phone, message):
-    subject = "New Contact Form Submission - SmorX.ai"
-    phone_line = f"  Phone       : {phone}" if phone else "  Phone       : —"
-    body = f"""
-You have received a new message via the SmorX.ai contact form.
-
-─────────────────────────────────────
-  CONTACT DETAILS
-─────────────────────────────────────
-  Full Name   : {name}
-  Email       : {email}
-{phone_line}
-─────────────────────────────────────
-  MESSAGE
-─────────────────────────────────────
-
-{message}
-
-─────────────────────────────────────
-Reply directly to {email} to respond.
-"""
-    try:
-        send_mail(
-            subject=subject,
-            message=body.strip(),
-            from_email=settings.DEFAULT_FROM_EMAIL,
-            recipient_list=[settings.CONTACT_RECIPIENT_EMAIL],
-            fail_silently=False,
-        )
-        logger.info("Contact email sent for %s <%s>", name, email)
-    except Exception as e:
-        logger.error("Failed to send contact email: %s", e)
+    phone_display = phone if phone else "Not provided"
+    resend.Emails.send({
+        "from": "SmorX.ai <onboarding@resend.dev>",
+        "to": ["smorx.ai@gmail.com"],
+        "subject": "New Contact Form Submission - SmorX.ai",
+        "html": f"""
+            <h3>New Contact Form Submission</h3>
+            <p><strong>Name:</strong> {name}</p>
+            <p><strong>Email:</strong> {email}</p>
+            <p><strong>Phone:</strong> {phone_display}</p>
+            <p><strong>Message:</strong><br>{message}</p>
+        """,
+    })
+    logger.info("Contact email sent via Resend for %s <%s>", name, email)
 
 
 class ContactAPIView(APIView):
@@ -64,12 +49,19 @@ class ContactAPIView(APIView):
         serializer = ContactMessageSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save(ip_address=get_client_ip(request))
-            send_contact_email(
-                name=serializer.validated_data['name'],
-                email=serializer.validated_data['email'],
-                phone=serializer.validated_data.get('phone', ''),
-                message=serializer.validated_data['message'],
-            )
+            try:
+                send_contact_email(
+                    name=serializer.validated_data['name'],
+                    email=serializer.validated_data['email'],
+                    phone=serializer.validated_data.get('phone', ''),
+                    message=serializer.validated_data['message'],
+                )
+            except Exception as e:
+                logger.error("Failed to send contact email via Resend: %s", e)
+                return Response(
+                    {'detail': 'Message saved but email delivery failed. Please try again later.'},
+                    status=status.HTTP_500_INTERNAL_SERVER_ERROR,
+                )
             return Response(
                 {'message': "Thank you for reaching out! We'll get back to you within 24 hours."},
                 status=status.HTTP_201_CREATED,
