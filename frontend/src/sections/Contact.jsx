@@ -1,6 +1,5 @@
 import { useState, useRef, useEffect } from 'react'
 import { Send, CheckCircle, AlertCircle, Mail, MapPin, Phone, Loader2, ArrowRight } from 'lucide-react'
-import axios from 'axios'
 
 const INITIAL_FORM = { name: '', email: '', phone: '', message: '' }
 
@@ -78,13 +77,21 @@ export default function Contact() {
     setStatus('loading')
     try {
       const API_BASE = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000'
-      await axios.post(`${API_BASE}/api/contact/`, form)
+      const res = await fetch(`${API_BASE}/api/contact/`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(form),
+      })
+      const data = await res.json()
+      if (!res.ok) {
+        throw new Error(data?.detail || data?.message || 'Something went wrong. Please try again.')
+      }
       setStatus('success')
       setForm(INITIAL_FORM)
       setErrors({})
     } catch (err) {
       setStatus('error')
-      setErrorMsg(err.response?.data?.detail || err.response?.data?.message || 'Something went wrong. Please try again.')
+      setErrorMsg(err.message || 'Something went wrong. Please try again.')
     }
   }
 
