@@ -131,7 +131,7 @@ export default function Footer() {
           {/* Bottom bar */}
           <div className="mt-12 pt-6 border-t border-white/[0.05] flex flex-col sm:flex-row items-center justify-between gap-3">
             <p className="text-white/25 text-xs">
-              © {new Date().getFullYear()} SmorX.ai. All rights reserved.
+              © 2025 SmorX.ai. All rights reserved.
             </p>
             <p className="text-white/25 text-xs">
               Designed & built with precision
