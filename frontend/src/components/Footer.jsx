@@ -1,5 +1,4 @@
-import { Zap, Twitter, Linkedin, Github, Mail, ArrowUpRight, ArrowRight } from 'lucide-react'
-import LogoText from './LogoText'
+import { Twitter, Linkedin, Github, Mail, ArrowUpRight, ArrowRight } from 'lucide-react'
 
 const FOOTER_LINKS = {
   Company: [
@@ -37,7 +36,7 @@ export default function Footer() {
   }
 
   return (
-    <footer className="relative bg-[#080C15] overflow-hidden" role="contentinfo">
+    <footer className="relative overflow-hidden" style={{ background: 'radial-gradient(circle at 20% 20%, #0A0F1E 0%, #070B16 60%, #050812 100%)', borderTop: '1px solid rgba(255,255,255,0.04)' }} role="contentinfo">
 
       {/* Pre-footer CTA */}
       <div className="relative border-t border-white/[0.06] overflow-hidden">
@@ -77,37 +76,37 @@ export default function Footer() {
       {/* Footer links */}
       <div className="border-t border-white/[0.05]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 lg:gap-10">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 lg:gap-10 items-start">
 
             {/* Brand */}
-            <div className="lg:col-span-2">
-              <a href="#home" onClick={(e) => handleNavClick(e, '#home')} className="flex items-center gap-2 mb-4 w-fit">
-                <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-purple to-primary flex items-center justify-center">
-                  <Zap className="w-4 h-4 text-white" aria-hidden="true" />
+            <div className="lg:col-span-2 flex flex-col items-start">
+              <div className="flex flex-col items-center w-full max-w-[260px]">
+                <a href="#home" onClick={(e) => handleNavClick(e, '#home')} className="inline-block w-fit">
+                  <img
+                    src="/smorx-logo.png"
+                    alt="SmorX.ai Logo"
+                    className="h-24 sm:h-32 w-auto object-contain block"
+                  />
+                </a>
+                <div className="flex justify-center gap-3 mt-4 w-full">
+                  {SOCIALS.map(({ icon: Icon, label, href }) => (
+                    <a
+                      key={label}
+                      href={href}
+                      aria-label={label}
+                      className="w-10 h-10 rounded-lg border border-white/10 flex items-center justify-center text-white/40 hover:text-white hover:border-white/20 hover:bg-white/[0.05] transition-all duration-200"
+                    >
+                      <Icon className="w-4 h-4" aria-hidden="true" />
+                    </a>
+                  ))}
                 </div>
-                <LogoText className="text-lg" />
-              </a>
-              <p className="text-white/40 text-sm leading-relaxed mb-6 max-w-xs">
-                Building the intelligent infrastructure of tomorrow, one model at a time.
-              </p>
-              <div className="flex items-center gap-2">
-                {SOCIALS.map(({ icon: Icon, label, href }) => (
-                  <a
-                    key={label}
-                    href={href}
-                    aria-label={label}
-                    className="w-8 h-8 rounded-lg border border-white/[0.08] flex items-center justify-center text-white/40 hover:text-white hover:border-white/20 hover:bg-white/[0.05] transition-all duration-200"
-                  >
-                    <Icon className="w-3.5 h-3.5" aria-hidden="true" />
-                  </a>
-                ))}
               </div>
             </div>
 
             {/* Links */}
             {Object.entries(FOOTER_LINKS).map(([section, links]) => (
-              <div key={section}>
-                <h3 className="text-xs font-semibold text-white/50 uppercase tracking-widest mb-4">
+              <div key={section} className="flex flex-col items-start gap-3">
+                <h3 className="text-xs font-semibold text-white/50 uppercase tracking-widest">
                   {section}
                 </h3>
                 <ul className="space-y-3" role="list">

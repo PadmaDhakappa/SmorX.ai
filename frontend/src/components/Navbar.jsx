@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Menu, X, Zap, ArrowRight } from 'lucide-react'
-import LogoText from './LogoText'
+import { Menu, X, ArrowRight } from 'lucide-react'
 
 const NAV_LINKS = [
   { label: 'Home', href: '#home' },
@@ -51,19 +50,20 @@ export default function Navbar() {
         aria-label="Main navigation"
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-14 md:h-16">
+          <div className="flex items-center justify-between h-20 md:h-24">
 
             {/* Logo */}
             <a
               href="#home"
               onClick={(e) => handleNavClick(e, '#home')}
-              className="flex items-center gap-2 group shrink-0"
+              className="flex items-center shrink-0"
               aria-label="SmorX.ai — Home"
             >
-              <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-purple to-primary flex items-center justify-center shadow-lg shadow-purple/20 group-hover:shadow-purple/40 transition-shadow duration-300">
-                <Zap className="w-4 h-4 text-white" aria-hidden="true" />
-              </div>
-              <LogoText className="text-lg" />
+              <img
+                src="/smorx-logo.png"
+                alt="SmorX.ai Logo"
+                className="h-16 md:h-20 lg:h-24 w-auto object-contain"
+              />
             </a>
 
             {/* Desktop Links */}
