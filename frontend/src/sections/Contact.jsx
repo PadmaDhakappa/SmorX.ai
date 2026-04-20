@@ -17,7 +17,7 @@ const CONTACT_INFO = [
   {
     icon: Phone,
     title: 'Phone',
-    detail: '+91 80812 59071',
+    detail: '+91 9632727325',
     sub: 'Mon–Fri, 9am–6pm IST',
     color: 'text-purple-400',
     bg: 'bg-purple/10',
