@@ -1,153 +1,127 @@
-import { useEffect, useRef } from 'react'
+import { motion } from 'framer-motion'
 import { Star, Quote } from 'lucide-react'
-import LogoText from '../components/LogoText'
+import SectionHeader from '../components/ui/SectionHeader'
+import BrandName from '../components/BrandName'
 
 const TESTIMONIALS = [
   {
     name: 'Sarah Chen',
     role: 'Chief Technology Officer',
-    avatar: 'SC',
-    avatarGradient: 'from-blue-500 to-cyan-400',
-    rating: 5,
-    text: "SmorX.ai's ML models reduced our fraud detection time by 87%. Their team's expertise and support throughout integration was exceptional. Truly a game changer for our operations.",
-    highlight: '87% faster detection',
+    company: 'FinTech Scale-up',
+    quote: <><BrandName /> deployed a fraud detection agent that reduced our false positives by 73% within the first month. The speed of delivery was unlike any vendor engagement we&apos;ve had.</>,
+    metric: '87% faster detection',
+    metricColor: '#7C3AED',
+    initials: 'SC',
+    gradient: 'from-violet-500 to-blue-500',
+    stars: 5,
   },
   {
     name: 'Marcus Williams',
     role: 'VP of Engineering',
-    avatar: 'MW',
-    avatarGradient: 'from-purple-500 to-indigo-400',
-    rating: 5,
-    text: "We deployed their AI chatbot across 12 markets and saw a 3x increase in customer satisfaction scores within 60 days. The ROI has been incredible. Highly recommend.",
-    highlight: '3x satisfaction increase',
+    company: 'Enterprise SaaS',
+    quote: <>We replaced a 12-person support tier with a <BrandName /> multi-agent system. Customer satisfaction tripled. The agents handle edge cases our old chatbot couldn&apos;t touch.</>,
+    metric: '3× satisfaction increase',
+    metricColor: '#06B6D4',
+    initials: 'MW',
+    gradient: 'from-cyan-500 to-blue-600',
+    stars: 5,
   },
   {
     name: 'Priya Patel',
     role: 'Head of Data Science',
-    avatar: 'PP',
-    avatarGradient: 'from-orange-500 to-amber-400',
-    rating: 5,
-    text: "The data analytics platform SmorX.ai built for us processes 50M records daily. It's fast, accurate, and the predictive models have genuinely transformed how we make decisions.",
-    highlight: '50M records/day',
+    company: 'Retail Enterprise',
+    quote: <>The AI data intelligence layer <BrandName /> built processes 50M records daily and surfaces actionable insights before my team even starts their day. Game-changing operational leverage.</>,
+    metric: '50M records/day',
+    metricColor: '#3B82F6',
+    initials: 'PP',
+    gradient: 'from-blue-500 to-violet-500',
+    stars: 5,
   },
 ]
 
 export default function Trust() {
-  const sectionRef = useRef(null)
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) entry.target.classList.add('visible')
-        })
-      },
-      { threshold: 0.1, rootMargin: '0px 0px -60px 0px' }
-    )
-    const elements = sectionRef.current?.querySelectorAll('.animate-on-scroll')
-    elements?.forEach((el) => observer.observe(el))
-    return () => observer.disconnect()
-  }, [])
-
   return (
-    <section
-      id="trust"
-      ref={sectionRef}
-      className="relative py-16 sm:py-20 lg:py-28 bg-dark overflow-hidden"
-      aria-label="Client testimonials"
-    >
-      <div className="divider-x absolute top-0 inset-x-0" aria-hidden="true" />
-      <div className="absolute top-1/2 right-0 w-96 h-96 bg-primary/5 rounded-full blur-3xl -translate-y-1/2 pointer-events-none" aria-hidden="true" />
+    <section id="trust" className="relative py-28 overflow-hidden" style={{ background: '#0B1020' }}>
+      <div className="bg-grid absolute inset-0 pointer-events-none opacity-40" />
+      <div className="glow-spot-violet absolute w-[600px] h-[600px] top-0 left-0 opacity-15" />
+      <div className="glow-spot-cyan absolute w-[500px] h-[500px] bottom-0 right-0 opacity-12" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <SectionHeader
+          label="Testimonials"
+          title='Trusted by Teams <span class="gradient-text">Building the Future</span>'
+          subtitle="What the people actually deploying these systems say — no marketing language, just outcomes."
+          className="mb-16"
+        />
 
-        {/* Header */}
-        <div className="text-center mb-16 animate-on-scroll">
-          <div className="section-label bg-yellow-400/10 border border-yellow-400/20 text-yellow-400 mb-5">
-            <Star className="w-3 h-3 fill-yellow-400" aria-hidden="true" />
-            Client Stories
-          </div>
-          <h2 className="section-heading mb-4">
-            <span className="text-white">Trusted by </span>
-            <span className="gradient-text">Innovative Teams</span>
-          </h2>
-          <p className="section-subheading">
-            Join 150+ forward-thinking companies that rely on <LogoText /> to power their AI transformation.
-          </p>
-        </div>
-
-        {/* Testimonials */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
           {TESTIMONIALS.map((t, i) => (
-            <figure
+            <motion.div
               key={t.name}
-              className="animate-on-scroll glass-card rounded-2xl p-6 border border-white/[0.07] hover:border-white/15 relative overflow-hidden group transition-all duration-300 hover:-translate-y-1"
-              style={{ transitionDelay: `${i * 100}ms` }}
+              initial={{ opacity: 0, y: 28 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: i * 0.12, ease: [0.16, 1, 0.3, 1] }}
+              whileHover={{ y: -4 }}
+              className="relative rounded-2xl p-6 flex flex-col gap-5 overflow-hidden"
+              style={{
+                background: 'rgba(255,255,255,0.03)',
+                border: '1px solid rgba(255,255,255,0.07)',
+                transition: 'all 0.4s cubic-bezier(0.16,1,0.3,1)',
+              }}
             >
-              {/* Large quote mark */}
-              <Quote
-                className="absolute -top-1 right-4 w-16 h-16 text-white/[0.03] group-hover:text-white/[0.05] transition-colors"
-                aria-hidden="true"
-              />
+              {/* Quote watermark */}
+              <Quote size={40} className="absolute top-4 right-4 opacity-[0.04] text-white" />
 
-              <div className="relative z-10">
-                {/* Stars */}
-                <div className="flex gap-0.5 mb-4" aria-label={`${t.rating} out of 5 stars`}>
-                  {Array.from({ length: t.rating }).map((_, i) => (
-                    <Star key={i} className="w-3.5 h-3.5 fill-yellow-400 text-yellow-400" aria-hidden="true" />
-                  ))}
-                </div>
-
-                {/* Highlight pill */}
-                <div className="inline-flex items-center px-2.5 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-medium mb-3">
-                  {t.highlight}
-                </div>
-
-                {/* Quote */}
-                <blockquote className="mb-6">
-                  <p className="text-white/60 text-sm leading-relaxed">
-                    "{t.text}"
-                  </p>
-                </blockquote>
-
-                {/* Author */}
-                <figcaption className="flex items-center gap-3 pt-4 border-t border-white/[0.06]">
-                  <div
-                    className={`w-9 h-9 rounded-full bg-gradient-to-br ${t.avatarGradient} flex items-center justify-center text-xs font-bold text-white shrink-0`}
-                    aria-hidden="true"
-                  >
-                    {t.avatar}
-                  </div>
-                  <div>
-                    <div className="text-sm font-semibold text-white">{t.name}</div>
-                    <div className="text-xs text-white/35">{t.role}</div>
-                  </div>
-                </figcaption>
+              {/* Stars */}
+              <div className="flex items-center gap-0.5">
+                {[...Array(t.stars)].map((_, s) => (
+                  <Star key={s} size={13} fill="#EAB308" color="#EAB308" />
+                ))}
               </div>
-            </figure>
+
+              {/* Metric badge */}
+              <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold w-fit"
+                style={{ background: `${t.metricColor}12`, border: `1px solid ${t.metricColor}28`, color: t.metricColor }}>
+                ↑ {t.metric}
+              </span>
+
+              {/* Quote */}
+              <p className="text-sm text-white/55 leading-relaxed flex-1 italic">"{t.quote}"</p>
+
+              {/* Author */}
+              <div className="flex items-center gap-3 pt-2 border-t border-white/[0.06]">
+                <div className={`w-10 h-10 rounded-full flex items-center justify-center text-xs font-bold text-white bg-gradient-to-br ${t.gradient} flex-shrink-0`}>
+                  {t.initials}
+                </div>
+                <div>
+                  <div className="text-sm font-semibold text-white">{t.name}</div>
+                  <div className="text-xs text-white/35">{t.role}, {t.company}</div>
+                </div>
+              </div>
+            </motion.div>
           ))}
         </div>
 
         {/* Rating summary */}
-        <div className="mt-10 animate-on-scroll">
-          <div className="glass-card rounded-2xl p-5 border border-yellow-400/[0.08]">
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-6">
-              <div className="flex gap-1">
-                {[1,2,3,4,5].map(i => (
-                  <Star key={i} className="w-5 h-5 fill-yellow-400 text-yellow-400" aria-hidden="true" />
-                ))}
-              </div>
-              <div className="flex items-baseline gap-2">
-                <span className="text-3xl font-bold text-white tracking-tight">4.9</span>
-                <span className="text-white/40 text-sm">/ 5.0</span>
-              </div>
-              <div className="hidden sm:block w-px h-8 bg-white/10" aria-hidden="true" />
-              <p className="text-white/40 text-sm text-center sm:text-left">
-                Based on <span className="text-white/70 font-medium">50+</span> verified client reviews
-              </p>
+        <motion.div
+          className="mt-10 flex justify-center"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.5 }}
+        >
+          <div className="glass rounded-2xl px-8 py-4 flex items-center gap-6 border border-white/[0.07]">
+            <div className="flex items-center gap-1.5">
+              {[...Array(5)].map((_, i) => <Star key={i} size={14} fill="#EAB308" color="#EAB308" />)}
+              <span className="ml-1.5 text-white font-semibold text-sm">4.9</span>
             </div>
+            <div className="h-4 w-px bg-white/10" />
+            <span className="text-white/40 text-sm">Rated by 50+ enterprise teams</span>
+            <div className="h-4 w-px bg-white/10" />
+            <span className="text-white/40 text-sm">Avg. deployment: 7 weeks</span>
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   )

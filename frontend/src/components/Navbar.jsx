@@ -1,150 +1,160 @@
 import { useState, useEffect } from 'react'
-import { Menu, X, ArrowRight } from 'lucide-react'
+import { motion, AnimatePresence } from 'framer-motion'
+import { Menu, X, ChevronDown } from 'lucide-react'
 
 const NAV_LINKS = [
-  { label: 'Home', href: '#home' },
-  { label: 'About', href: '#about' },
-  { label: 'Services', href: '#services' },
-  { label: 'Sector Expertise', href: '#industries' },
-  { label: 'Projects', href: '#success-stories' },
+  { label: 'Platform', href: '#control-plane' },
+  { label: 'Solutions', href: '#services', sub: [
+    { label: 'Agentic Workflows', href: '#services' },
+    { label: 'Multi-Agent Systems', href: '#services' },
+    { label: 'AI Data Intelligence', href: '#services' },
+    { label: 'Agent Marketplace', href: '#agents' },
+  ]},
+  { label: 'Industries', href: '#industries' },
+  { label: 'Case Studies', href: '#case-studies' },
+  { label: 'Insights', href: '#blog' },
   { label: 'Contact', href: '#contact' },
 ]
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
-  const [activeSection, setActiveSection] = useState('home')
+  const [openDropdown, setOpenDropdown] = useState(null)
 
   useEffect(() => {
-    const sections = ['home', 'about', 'services', 'industries', 'success-stories', 'trust', 'contact']
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 20)
-      const reversed = [...sections].reverse()
-      for (const id of reversed) {
-        const el = document.getElementById(id)
-        if (el && window.scrollY >= el.offsetTop - 130) {
-          setActiveSection(id)
-          break
-        }
-      }
-    }
-    window.addEventListener('scroll', handleScroll, { passive: true })
-    return () => window.removeEventListener('scroll', handleScroll)
+    const onScroll = () => setScrolled(window.scrollY > 24)
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
-  const handleNavClick = (e, href) => {
-    e.preventDefault()
+  const handleNav = (href) => {
     setMobileOpen(false)
-    document.getElementById(href.replace('#', ''))?.scrollIntoView({ behavior: 'smooth' })
+    setOpenDropdown(null)
+    const el = document.querySelector(href)
+    if (el) el.scrollIntoView({ behavior: 'smooth' })
   }
 
   return (
     <>
-      <nav
+      <motion.nav
+        initial={{ y: -80, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-          scrolled
-            ? 'bg-[#0B0F1A]/85 backdrop-blur-2xl border-b border-white/[0.06] shadow-xl shadow-black/30'
-            : 'bg-transparent'
+          scrolled ? 'glass-strong border-b border-white/[0.06] shadow-[0_4px_24px_rgba(0,0,0,0.4)]' : 'bg-transparent'
         }`}
-        role="navigation"
-        aria-label="Main navigation"
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-20 md:h-24">
-
+          <div className="flex items-center justify-between h-16">
             {/* Logo */}
-            <a
-              href="#home"
-              onClick={(e) => handleNavClick(e, '#home')}
-              className="flex items-center shrink-0"
-              aria-label="SmorX.ai — Home"
+            <button
+              onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+              className="flex items-center"
             >
               <img
                 src="/smorx-logo.png"
-                alt="SmorX.ai Logo"
-                className="h-16 md:h-20 lg:h-24 w-auto object-contain"
+                alt="SmorX.ai"
+                className="h-20 w-auto object-contain"
               />
-            </a>
+            </button>
 
             {/* Desktop Links */}
-            <ul className="hidden lg:flex items-center" role="list">
-              {NAV_LINKS.map(({ label, href }) => {
-                const id = href.replace('#', '')
-                const isActive = activeSection === id
-                return (
-                  <li key={label}>
-                    <a
-                      href={href}
-                      onClick={(e) => handleNavClick(e, href)}
-                      className={`relative px-3 py-2 text-[13px] font-medium transition-colors duration-200 ${
-                        isActive ? 'text-white' : 'text-white/50 hover:text-white/90'
-                      }`}
-                      aria-current={isActive ? 'page' : undefined}
+            <div className="hidden lg:flex items-center gap-0.5">
+              {NAV_LINKS.map((link) => (
+                <div key={link.label} className="relative group">
+                  <button
+                    className="flex items-center gap-1 px-3.5 py-2 rounded-lg text-sm text-white/55 hover:text-white hover:bg-white/[0.04] transition-all duration-200"
+                    onClick={() => handleNav(link.href)}
+                    onMouseEnter={() => link.sub && setOpenDropdown(link.label)}
+                    onMouseLeave={() => link.sub && setOpenDropdown(null)}
+                  >
+                    {link.label}
+                    {link.sub && (
+                      <ChevronDown size={12} className={`transition-transform duration-200 ${openDropdown === link.label ? 'rotate-180' : ''}`} />
+                    )}
+                  </button>
+
+                  {link.sub && openDropdown === link.label && (
+                    <div
+                      className="absolute top-full left-0 mt-1 w-52 glass-strong rounded-xl border border-white/[0.08] shadow-card py-1.5 z-50"
+                      onMouseEnter={() => setOpenDropdown(link.label)}
+                      onMouseLeave={() => setOpenDropdown(null)}
                     >
-                      {label}
-                      {isActive && (
-                        <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-3 h-0.5 bg-gradient-to-r from-primary to-purple rounded-full" />
-                      )}
-                    </a>
-                  </li>
-                )
-              })}
-            </ul>
+                      {link.sub.map(s => (
+                        <button
+                          key={s.label}
+                          onClick={() => handleNav(s.href)}
+                          className="w-full text-left px-4 py-2.5 text-sm text-white/55 hover:text-white hover:bg-white/[0.04] transition-all duration-150"
+                        >
+                          {s.label}
+                        </button>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
 
-            {/* CTA + Mobile toggle */}
-            <div className="flex items-center gap-2">
-              <a
-                href="#contact"
-                onClick={(e) => handleNavClick(e, '#contact')}
-                className="hidden sm:inline-flex btn-accent text-xs py-2 px-4 gap-1.5"
-                aria-label="Get Started"
+            {/* Desktop CTA */}
+            <div className="hidden lg:flex items-center gap-3">
+              <motion.button
+                onClick={() => handleNav('#contact')}
+                className="btn-outline text-sm px-4 py-2"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.97 }}
+              >
+                Book a Call
+              </motion.button>
+              <motion.button
+                onClick={() => handleNav('#contact')}
+                className="btn-primary text-sm px-4 py-2"
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.97 }}
               >
                 Get Started
-                <ArrowRight className="w-3 h-3" aria-hidden="true" />
-              </a>
-              <button
-                className="lg:hidden p-2.5 rounded-lg text-white/60 hover:text-white hover:bg-white/[0.06] transition-colors min-w-[44px] min-h-[44px] flex items-center justify-center"
-                onClick={() => setMobileOpen(!mobileOpen)}
-                aria-expanded={mobileOpen}
-                aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
-              >
-                {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-              </button>
+              </motion.button>
             </div>
-          </div>
-        </div>
 
-        {/* Mobile menu */}
-        <div
-          className={`lg:hidden transition-all duration-300 overflow-hidden ${
-            mobileOpen ? 'max-h-[600px] opacity-100' : 'max-h-0 opacity-0'
-          }`}
-          aria-hidden={!mobileOpen}
-        >
-          <div className="bg-[#0B0F1A]/98 backdrop-blur-2xl border-b border-white/[0.06] px-4 pt-1 pb-5 space-y-0.5">
-            {NAV_LINKS.map(({ label, href }) => (
-              <a
-                key={label}
-                href={href}
-                onClick={(e) => handleNavClick(e, href)}
-                className="flex items-center px-3 py-3.5 rounded-lg text-sm text-white/60 hover:text-white hover:bg-white/[0.06] transition-all min-h-[44px]"
-              >
-                {label}
-              </a>
-            ))}
-            <div className="pt-3 px-3">
-              <a
-                href="#contact"
-                onClick={(e) => handleNavClick(e, '#contact')}
-                className="btn-accent w-full text-sm justify-center py-3"
-              >
-                Get Started
-                <ArrowRight className="w-4 h-4" aria-hidden="true" />
-              </a>
-            </div>
+            {/* Mobile hamburger */}
+            <button
+              className="lg:hidden p-2 rounded-lg text-white/60 hover:text-white hover:bg-white/[0.05] transition"
+              onClick={() => setMobileOpen(!mobileOpen)}
+              aria-label="Toggle menu"
+            >
+              {mobileOpen ? <X size={20} /> : <Menu size={20} />}
+            </button>
           </div>
         </div>
-      </nav>
+      </motion.nav>
+
+      {/* Mobile Menu */}
+      <AnimatePresence>
+        {mobileOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.25 }}
+            className="fixed top-16 left-0 right-0 z-40 glass-strong border-b border-white/[0.06]"
+          >
+            <div className="max-w-7xl mx-auto px-4 py-4 flex flex-col gap-1">
+              {NAV_LINKS.map(link => (
+                <button
+                  key={link.label}
+                  onClick={() => handleNav(link.href)}
+                  className="text-left px-4 py-3 rounded-xl text-sm text-white/60 hover:text-white hover:bg-white/[0.05] transition"
+                >
+                  {link.label}
+                </button>
+              ))}
+              <div className="pt-3 pb-1 flex flex-col gap-2">
+                <button onClick={() => handleNav('#contact')} className="btn-outline w-full justify-center">Book a Call</button>
+                <button onClick={() => handleNav('#contact')} className="btn-primary w-full justify-center">Get Started</button>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   )
 }

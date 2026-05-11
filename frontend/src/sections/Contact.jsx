@@ -1,79 +1,37 @@
-import { useState, useRef, useEffect } from 'react'
-import { Send, CheckCircle, AlertCircle, Mail, MapPin, Phone, Loader2, ArrowRight } from 'lucide-react'
+import { useState } from 'react'
+import { motion } from 'framer-motion'
+import { Send, CheckCircle, AlertCircle, Mail, MapPin, Phone, Loader2, ArrowRight, Calendar } from 'lucide-react'
+import SectionHeader from '../components/ui/SectionHeader'
+import BrandName from '../components/BrandName'
 
 const INITIAL_FORM = { name: '', email: '', phone: '', message: '' }
 
-const CONTACT_INFO = [
-  {
-    icon: Mail,
-    title: 'Email',
-    detail: 'outreach@smorx.ai',
-    sub: 'We reply within 24 hours',
-    color: 'text-primary',
-    bg: 'bg-primary/10',
-    border: 'group-hover:border-primary/25',
-    href: 'mailto:outreach@smorx.ai',
-  },
-  {
-    icon: Phone,
-    title: 'Phone',
-    detail: '+91 8147681616',
-    sub: 'Mon–Fri, 9am–6pm IST',
-    color: 'text-purple-400',
-    bg: 'bg-purple/10',
-    border: 'group-hover:border-purple/25',
-    href: 'tel:+918081259071',
-  },
-  {
-    icon: MapPin,
-    title: 'Office',
-    detail: '12/A 8th Main 14th Cross',
-    sub: 'Off HAL Airport Road',
-    sub2: 'Bangalore 560017',
-    color: 'text-accent',
-    bg: 'bg-accent/10',
-    border: 'group-hover:border-accent/25',
-    href: null,
-  },
-]
+function validate(form) {
+  const errors = {}
+  if (!form.name.trim()) errors.name = 'Name is required'
+  if (!form.email.trim()) errors.email = 'Email is required'
+  else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) errors.email = 'Enter a valid email'
+  if (!form.message.trim()) errors.message = 'Message is required'
+  else if (form.message.trim().length < 10) errors.message = 'At least 10 characters'
+  return errors
+}
 
 export default function Contact() {
   const [form, setForm] = useState(INITIAL_FORM)
   const [errors, setErrors] = useState({})
   const [status, setStatus] = useState('idle')
   const [errorMsg, setErrorMsg] = useState('')
-  const sectionRef = useRef(null)
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => entries.forEach((e) => e.isIntersecting && e.target.classList.add('visible')),
-      { threshold: 0.1, rootMargin: '0px 0px -60px 0px' }
-    )
-    const els = sectionRef.current?.querySelectorAll('.animate-on-scroll')
-    els?.forEach((el) => observer.observe(el))
-    return () => observer.disconnect()
-  }, [])
-
-  const validate = () => {
-    const errs = {}
-    if (!form.name.trim()) errs.name = 'Name is required'
-    if (!form.email.trim()) errs.email = 'Email is required'
-    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) errs.email = 'Enter a valid email address'
-    if (!form.message.trim()) errs.message = 'Message is required'
-    else if (form.message.trim().length < 10) errs.message = 'Message must be at least 10 characters'
-    return errs
-  }
 
   const handleChange = (e) => {
     const { name, value } = e.target
-    setForm((p) => ({ ...p, [name]: value }))
-    if (errors[name]) setErrors((p) => ({ ...p, [name]: '' }))
+    setForm(f => ({ ...f, [name]: value }))
+    if (errors[name]) setErrors(e => ({ ...e, [name]: '' }))
   }
 
   const handleSubmit = async (e) => {
     e.preventDefault()
-    const errs = validate()
-    if (Object.keys(errs).length > 0) { setErrors(errs); return }
+    const errs = validate(form)
+    if (Object.keys(errs).length) { setErrors(errs); return }
     setStatus('loading')
     try {
       const res = await fetch('https://smorx-backend.onrender.com/api/contact/', {
@@ -81,210 +39,195 @@ export default function Contact() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(form),
       })
-      const data = await res.json()
       if (!res.ok) {
-        throw new Error(data?.detail || data?.message || 'Something went wrong. Please try again.')
+        const data = await res.json().catch(() => ({}))
+        throw new Error(data.detail || data.message || 'Submission failed')
       }
       setStatus('success')
-      setForm(INITIAL_FORM)
-      setErrors({})
     } catch (err) {
-      setStatus('error')
       setErrorMsg(err.message || 'Something went wrong. Please try again.')
+      setStatus('error')
     }
   }
 
-  const inputClass = (field) =>
-    `w-full bg-white/[0.04] border rounded-xl px-4 py-3 text-white text-sm placeholder-white/20
-     transition-all duration-200 outline-none
-     focus:ring-1 focus:ring-primary/40 focus:border-primary/50
-     ${errors[field]
-      ? 'border-red-400/40 bg-red-400/[0.03]'
-      : 'border-white/[0.08] hover:border-white/15'
+  const inputCls = (field) =>
+    `w-full px-4 py-3 rounded-xl text-sm text-white placeholder-white/25 transition-all duration-200 outline-none bg-white/[0.04] border ${
+      errors[field]
+        ? 'border-red-500/50 focus:border-red-500/70'
+        : 'border-white/[0.08] focus:border-violet-500/50 focus:bg-white/[0.06]'
     }`
 
   return (
-    <section
-      id="contact"
-      ref={sectionRef}
-      className="relative py-16 sm:py-20 lg:py-28 bg-[#0D1120] overflow-hidden"
-      aria-label="Contact section"
-    >
-      <div className="divider-x absolute top-0 inset-x-0" aria-hidden="true" />
-      <div className="absolute bottom-0 right-0 w-96 h-96 bg-accent/5 rounded-full blur-3xl pointer-events-none" aria-hidden="true" />
+    <section id="contact" className="relative py-28 overflow-hidden" style={{ background: '#060A12' }}>
+      <div className="bg-grid absolute inset-0 pointer-events-none opacity-40" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* Animated glow behind CTA */}
+      <div className="glow-spot-violet absolute w-[800px] h-[800px] top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-20 animate-glow-pulse" />
 
-        {/* Header */}
-        <div className="text-center mb-16 animate-on-scroll">
-          <div className="section-label bg-accent/10 border border-accent/20 text-accent mb-5">
-            <Mail className="w-3 h-3" aria-hidden="true" />
-            Get In Touch
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <SectionHeader
+          label="Get Started"
+          title='Start Building Your <span class="gradient-text">AI Operating Layer</span>'
+          subtitle={<>Tell us about your workflow, and <BrandName suffix=".ai" /> will help you design the right AI system, agent, or automation architecture.</>}
+          className="mb-16"
+        />
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
+
+          {/* Left: Info */}
+          <div className="flex flex-col gap-8">
+            {/* CTA cards */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {[
+                {
+                  icon: Calendar,
+                  title: 'Book Strategy Call',
+                  desc: '30-minute call with an AI architect. We map your workflow and suggest the right solution.',
+                  color: '#7C3AED',
+                  action: 'Schedule Now',
+                },
+                {
+                  icon: Send,
+                  title: 'Send a Brief',
+                  desc: 'Describe your challenge. We\'ll respond within 4 hours with a preliminary recommendation.',
+                  color: '#06B6D4',
+                  action: 'Send Brief',
+                },
+              ].map(card => (
+                <motion.div
+                  key={card.title}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  className="rounded-2xl p-5 flex flex-col gap-3"
+                  style={{ background: `${card.color}0C`, border: `1px solid ${card.color}20` }}
+                >
+                  <div className="w-9 h-9 rounded-xl flex items-center justify-center"
+                    style={{ background: `${card.color}18`, border: `1px solid ${card.color}30` }}>
+                    <card.icon size={16} style={{ color: card.color }} />
+                  </div>
+                  <div>
+                    <div className="font-semibold text-white text-sm mb-1">{card.title}</div>
+                    <p className="text-xs text-white/40 leading-relaxed">{card.desc}</p>
+                  </div>
+                  <button
+                    className="flex items-center gap-1 text-xs font-semibold mt-1 transition-opacity duration-200 hover:opacity-80"
+                    style={{ color: card.color }}
+                  >
+                    {card.action} <ArrowRight size={12} />
+                  </button>
+                </motion.div>
+              ))}
+            </div>
+
+            {/* Contact details */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2 }}
+              className="rounded-2xl p-6 flex flex-col gap-4 glass border border-white/[0.07]"
+            >
+              {[
+                { icon: Mail, label: 'Email', value: 'outreach@smorx.ai', note: 'Responds within 4 hours' },
+                { icon: Phone, label: 'Phone', value: '+91 80812 59071', note: 'Mon–Fri, 9am–6pm IST' },
+                { icon: MapPin, label: 'Office', value: 'Bangalore, India', note: 'Remote-first, global delivery' },
+              ].map(item => (
+                <div key={item.label} className="flex items-start gap-3.5">
+                  <div className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0"
+                    style={{ background: 'rgba(124,58,237,0.12)', border: '1px solid rgba(124,58,237,0.25)' }}>
+                    <item.icon size={14} className="text-violet-400" />
+                  </div>
+                  <div>
+                    <div className="text-xs text-white/30 mb-0.5">{item.label}</div>
+                    <div className="text-sm text-white font-medium">{item.value}</div>
+                    <div className="text-[11px] text-white/30 mt-0.5">{item.note}</div>
+                  </div>
+                </div>
+              ))}
+            </motion.div>
           </div>
-          <h2 className="section-heading mb-4">
-            <span className="text-white">Start Your AI </span>
-            <span className="gradient-text">Journey Today</span>
-          </h2>
-          <p className="section-subheading">
-            Tell us about your project and we'll respond within 24 hours with a tailored solution.
-          </p>
-        </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 items-start">
-
-          {/* Contact Info */}
-          <aside className="lg:col-span-2 space-y-3 animate-on-scroll" aria-label="Contact information">
-            {CONTACT_INFO.map(({ icon: Icon, title, detail, sub, sub2, color, bg, border, href }) => (
-              <div
-                key={title}
-                className={`glass-card rounded-2xl p-5 border border-white/[0.07] ${border} flex items-start gap-4 group transition-all duration-300`}
-              >
-                <div className={`w-10 h-10 rounded-xl ${bg} flex items-center justify-center shrink-0 group-hover:scale-105 transition-transform`}>
-                  <Icon className={`w-4.5 h-4.5 ${color}`} style={{ width: '18px', height: '18px' }} aria-hidden="true" />
+          {/* Right: Form */}
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="rounded-2xl p-8 glass-card border border-white/[0.08]"
+          >
+            {status === 'success' ? (
+              <div className="flex flex-col items-center justify-center gap-5 py-16 text-center">
+                <div className="w-16 h-16 rounded-full flex items-center justify-center"
+                  style={{ background: 'rgba(16,185,129,0.12)', border: '1px solid rgba(16,185,129,0.3)' }}>
+                  <CheckCircle size={28} className="text-emerald-400" />
                 </div>
                 <div>
-                  <div className="text-xs font-medium text-white/35 uppercase tracking-wider mb-0.5">{title}</div>
-                  {href ? (
-                    <a href={href} className="text-sm font-semibold text-white hover:text-white/80 transition-colors">
-                      {detail}
-                    </a>
-                  ) : (
-                    <div className="text-sm font-semibold text-white">{detail}</div>
-                  )}
-                  <div className="text-xs text-white/35 mt-0.5">{sub}</div>
-                  {sub2 && <div className="text-xs text-white/35">{sub2}</div>}
+                  <h3 className="text-xl font-bold text-white mb-2">Message Received</h3>
+                  <p className="text-sm text-white/45">We'll respond within 4 hours with a tailored recommendation.</p>
                 </div>
+                <button onClick={() => { setStatus('idle'); setForm(INITIAL_FORM) }} className="btn-outline text-sm px-6 py-2.5">
+                  Send Another
+                </button>
               </div>
-            ))}
-
-            {/* Response badge */}
-            <div className="glass-card rounded-2xl p-4 border border-emerald-400/[0.1] flex items-center gap-3">
-              <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse shrink-0" aria-hidden="true" />
-              <p className="text-sm text-white/50">
-                Avg. response: <span className="text-emerald-400 font-semibold">under 4 hours</span>
-              </p>
-            </div>
-          </aside>
-
-          {/* Form */}
-          <div className="lg:col-span-3 animate-on-scroll animation-delay-200">
-            <div className="glass-card rounded-2xl p-5 sm:p-8 border border-white/[0.07]">
-
-              {status === 'success' ? (
-                <div className="text-center py-10" role="alert" aria-live="polite">
-                  <div className="w-14 h-14 rounded-full bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center mx-auto mb-5">
-                    <CheckCircle className="w-7 h-7 text-emerald-400" aria-hidden="true" />
+            ) : (
+              <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-5">
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-xs text-white/45 mb-1.5 font-medium">Name *</label>
+                    <input name="name" value={form.name} onChange={handleChange}
+                      placeholder="Jane Smith" className={inputCls('name')} aria-required />
+                    {errors.name && <p className="text-xs text-red-400 mt-1">{errors.name}</p>}
                   </div>
-                  <h3 className="text-lg font-semibold text-white mb-2">Message Sent Successfully</h3>
-                  <p className="text-white/45 text-sm mb-6 leading-relaxed">
-                    Thank you for reaching out. Our team will get back to you within 24 hours.
-                  </p>
-                  <button onClick={() => { setStatus('idle'); setErrorMsg('') }} className="btn-outline text-sm">
-                    Send Another Message
-                  </button>
+                  <div>
+                    <label className="block text-xs text-white/45 mb-1.5 font-medium">Email *</label>
+                    <input name="email" type="email" value={form.email} onChange={handleChange}
+                      placeholder="jane@company.com" className={inputCls('email')} aria-required />
+                    {errors.email && <p className="text-xs text-red-400 mt-1">{errors.email}</p>}
+                  </div>
                 </div>
-              ) : (
-                <form onSubmit={handleSubmit} noValidate aria-label="Contact form">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
-                    {/* Name */}
-                    <div>
-                      <label htmlFor="name" className="block text-xs font-medium text-white/50 uppercase tracking-wider mb-2">
-                        Full Name <span className="text-accent" aria-hidden="true">*</span>
-                      </label>
-                      <input
-                        id="name" name="name" type="text"
-                        value={form.name} onChange={handleChange}
-                        placeholder="John Smith"
-                        autoComplete="name"
-                        aria-required="true" aria-invalid={!!errors.name}
-                        className={inputClass('name')}
-                      />
-                      {errors.name && (
-                        <p className="mt-1.5 text-xs text-red-400 flex items-center gap-1" role="alert">
-                          <AlertCircle className="w-3 h-3" aria-hidden="true" /> {errors.name}
-                        </p>
-                      )}
-                    </div>
 
-                    {/* Email */}
-                    <div>
-                      <label htmlFor="email" className="block text-xs font-medium text-white/50 uppercase tracking-wider mb-2">
-                        Email Address <span className="text-accent" aria-hidden="true">*</span>
-                      </label>
-                      <input
-                        id="email" name="email" type="email"
-                        value={form.email} onChange={handleChange}
-                        placeholder="john@company.com"
-                        autoComplete="email"
-                        aria-required="true" aria-invalid={!!errors.email}
-                        className={inputClass('email')}
-                      />
-                      {errors.email && (
-                        <p className="mt-1.5 text-xs text-red-400 flex items-center gap-1" role="alert">
-                          <AlertCircle className="w-3 h-3" aria-hidden="true" /> {errors.email}
-                        </p>
-                      )}
-                    </div>
+                <div>
+                  <label className="block text-xs text-white/45 mb-1.5 font-medium">Company / Phone</label>
+                  <input name="phone" value={form.phone} onChange={handleChange}
+                    placeholder="Acme Corp or +1 555 000 0000" className={inputCls('phone')} />
+                </div>
+
+                <div>
+                  <label className="block text-xs text-white/45 mb-1.5 font-medium">Tell us about your workflow *</label>
+                  <textarea name="message" rows={5} value={form.message} onChange={handleChange}
+                    placeholder="Describe the process you'd like to automate or the AI system you're looking to build..."
+                    className={`${inputCls('message')} resize-none`} aria-required />
+                  {errors.message && <p className="text-xs text-red-400 mt-1">{errors.message}</p>}
+                </div>
+
+                {status === 'error' && (
+                  <div className="flex items-center gap-2 px-4 py-3 rounded-xl bg-red-500/10 border border-red-500/20 text-red-400 text-sm">
+                    <AlertCircle size={15} />
+                    {errorMsg}
                   </div>
+                )}
 
-                  {/* Phone */}
-                  <div className="mb-4">
-                    <label htmlFor="phone" className="block text-xs font-medium text-white/50 uppercase tracking-wider mb-2">
-                      Phone Number <span className="text-white/25 normal-case tracking-normal">(optional)</span>
-                    </label>
-                    <input
-                      id="phone" name="phone" type="tel"
-                      value={form.phone} onChange={handleChange}
-                      placeholder="+91 98765 43210"
-                      autoComplete="tel"
-                      className={inputClass('phone')}
-                    />
-                  </div>
-
-                  {/* Message */}
-                  <div className="mb-5">
-                    <label htmlFor="message" className="block text-xs font-medium text-white/50 uppercase tracking-wider mb-2">
-                      Message <span className="text-accent" aria-hidden="true">*</span>
-                    </label>
-                    <textarea
-                      id="message" name="message" rows={5}
-                      value={form.message} onChange={handleChange}
-                      placeholder="Tell us about your project, goals, and how we can help..."
-                      aria-required="true" aria-invalid={!!errors.message}
-                      className={`${inputClass('message')} resize-none`}
-                    />
-                    {errors.message && (
-                      <p className="mt-1.5 text-xs text-red-400 flex items-center gap-1" role="alert">
-                        <AlertCircle className="w-3 h-3" aria-hidden="true" /> {errors.message}
-                      </p>
-                    )}
-                  </div>
-
-                  {/* Server error */}
-                  {status === 'error' && (
-                    <div className="flex items-start gap-3 p-3.5 rounded-xl bg-red-400/[0.07] border border-red-400/20 mb-4" role="alert">
-                      <AlertCircle className="w-4 h-4 text-red-400 shrink-0 mt-0.5" aria-hidden="true" />
-                      <p className="text-sm text-red-400">{errorMsg}</p>
-                    </div>
+                <motion.button
+                  type="submit"
+                  disabled={status === 'loading'}
+                  className="btn-primary w-full justify-center py-3.5 text-sm rounded-xl disabled:opacity-60 disabled:cursor-not-allowed"
+                  whileHover={status !== 'loading' ? { scale: 1.02 } : {}}
+                  whileTap={status !== 'loading' ? { scale: 0.98 } : {}}
+                >
+                  {status === 'loading' ? (
+                    <><Loader2 size={16} className="animate-spin" /> Sending...</>
+                  ) : (
+                    <><Send size={15} /> Send Message</>
                   )}
+                </motion.button>
 
-                  <button
-                    type="submit"
-                    disabled={status === 'loading'}
-                    className="w-full btn-accent py-3.5 disabled:opacity-50 disabled:cursor-not-allowed group"
-                  >
-                    {status === 'loading' ? (
-                      <><Loader2 className="w-4 h-4 animate-spin" aria-hidden="true" /> Sending…</>
-                    ) : (
-                      <><Send className="w-4 h-4" aria-hidden="true" /> Send Message
-                        <ArrowRight className="w-4 h-4 ml-auto group-hover:translate-x-0.5 transition-transform" aria-hidden="true" />
-                      </>
-                    )}
-                  </button>
-                </form>
-              )}
-            </div>
-          </div>
+                <p className="text-[11px] text-white/25 text-center">
+                  No spam. We respond with a tailored recommendation, not a sales deck.
+                </p>
+              </form>
+            )}
+          </motion.div>
         </div>
       </div>
     </section>

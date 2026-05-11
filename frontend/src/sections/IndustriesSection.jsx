@@ -1,149 +1,131 @@
-import { useEffect, useRef } from 'react'
-import { Car, Plane, Factory, Heart, Users, ShoppingCart, Zap, Shield } from 'lucide-react'
+import { motion } from 'framer-motion'
+import { Heart, Factory, Building2, ShoppingCart, Truck, Zap, Car, Shield } from 'lucide-react'
+import SectionHeader from '../components/ui/SectionHeader'
 
 const INDUSTRIES = [
   {
-    icon: Car,
-    title: 'Automotive',
-    description: 'Autonomous systems, predictive maintenance, and quality control',
-    gradient: 'from-blue-500/20 to-primary/10',
-    iconColor: 'text-primary',
-  },
-  {
-    icon: Plane,
-    title: 'Aviation',
-    description: 'Flight optimization, safety systems, and maintenance scheduling',
-    gradient: 'from-sky-500/20 to-blue-400/10',
-    iconColor: 'text-sky-400',
+    icon: Heart,
+    label: 'Healthcare',
+    color: '#F43F5E',
+    useCases: ['Clinical workflow automation', 'Diagnostic AI support', 'Patient triage intelligence'],
+    metric: '35% faster diagnosis',
   },
   {
     icon: Factory,
-    title: 'Manufacturing',
-    description: 'Smart factories, supply chain optimization, and quality assurance',
-    gradient: 'from-purple/20 to-indigo/10',
-    iconColor: 'text-purple-light',
+    label: 'Manufacturing',
+    color: '#8B5CF6',
+    useCases: ['Predictive maintenance', 'Quality control AI', 'Supply chain optimization'],
+    metric: '40% fewer defects',
   },
   {
-    icon: Heart,
-    title: 'Healthcare',
-    description: 'Medical imaging, diagnosis assistance, and patient care optimization',
-    gradient: 'from-rose-500/20 to-pink-400/10',
-    iconColor: 'text-rose-400',
-  },
-  {
-    icon: Users,
-    title: 'Staffing & Workforce Solutions',
-    description: 'AI driven talent intelligence, workforce optimization, and recruitment automation to help organizations identify, deploy, and manage talent more efficiently at scale.',
-    gradient: 'from-emerald-500/20 to-green-400/10',
-    iconColor: 'text-emerald-400',
+    icon: Building2,
+    label: 'Financial Services',
+    color: '#3B82F6',
+    useCases: ['Risk scoring AI', 'Fraud detection', 'Portfolio intelligence'],
+    metric: '30% loss reduction',
   },
   {
     icon: ShoppingCart,
-    title: 'Retail & E commerce',
-    description: 'Personalization, inventory management, and customer insights',
-    gradient: 'from-orange-500/20 to-accent/10',
-    iconColor: 'text-accent',
+    label: 'Retail & E-commerce',
+    color: '#F97316',
+    useCases: ['Personalization engines', 'Demand forecasting', 'Customer AI agents'],
+    metric: '55% conversion lift',
+  },
+  {
+    icon: Truck,
+    label: 'Logistics',
+    color: '#06B6D4',
+    useCases: ['Route optimization AI', 'Fleet intelligence', 'Delivery prediction'],
+    metric: '28% cost reduction',
   },
   {
     icon: Zap,
-    title: 'Energy & Utilities',
-    description: 'Smart grid management, consumption optimization, and renewable energy',
-    gradient: 'from-yellow-500/20 to-amber-400/10',
-    iconColor: 'text-yellow-400',
+    label: 'Energy & Utilities',
+    color: '#EAB308',
+    useCases: ['Grid anomaly detection', 'Consumption forecasting', 'Outage prevention AI'],
+    metric: '32% energy savings',
+  },
+  {
+    icon: Car,
+    label: 'Automotive',
+    color: '#10B981',
+    useCases: ['Autonomous systems AI', 'Quality inspection', 'Dealer intelligence'],
+    metric: '99.9% safety uptime',
   },
   {
     icon: Shield,
-    title: 'Security & Defense',
-    description: 'Threat detection, surveillance systems, and cybersecurity solutions',
-    gradient: 'from-indigo/20 to-purple/10',
-    iconColor: 'text-indigo-400',
+    label: 'Security & Defense',
+    color: '#6366F1',
+    useCases: ['Threat intelligence AI', 'Surveillance automation', 'Anomaly detection'],
+    metric: '60% faster response',
   },
 ]
 
 export default function IndustriesSection() {
-  const sectionRef = useRef(null)
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) entry.target.classList.add('visible')
-        })
-      },
-      { threshold: 0.1, rootMargin: '0px 0px -60px 0px' }
-    )
-    const elements = sectionRef.current?.querySelectorAll('.animate-on-scroll')
-    elements?.forEach((el) => observer.observe(el))
-    return () => observer.disconnect()
-  }, [])
-
   return (
-    <section
-      id="industries"
-      ref={sectionRef}
-      className="relative py-16 sm:py-20 lg:py-28 bg-dark-100 overflow-hidden"
-      aria-label="Industries we serve"
-    >
-      {/* Background accents */}
-      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" aria-hidden="true" />
-      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full max-w-lg h-px bg-gradient-to-r from-transparent via-purple/20 to-transparent" aria-hidden="true" />
-      <div className="absolute top-1/2 left-0 w-80 h-80 bg-primary/5 rounded-full blur-3xl -translate-y-1/2" aria-hidden="true" />
-      <div className="absolute top-1/3 right-0 w-96 h-96 bg-purple/5 rounded-full blur-3xl" aria-hidden="true" />
+    <section id="industries" className="relative py-28 overflow-hidden" style={{ background: '#080D18' }}>
+      <div className="bg-grid absolute inset-0 pointer-events-none opacity-50" />
+      <div className="glow-spot-cyan absolute w-[500px] h-[500px] top-0 right-0 opacity-20" />
+      <div className="glow-spot-violet absolute w-[500px] h-[500px] bottom-0 left-0 opacity-15" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <SectionHeader
+          label="Industry Focus"
+          title='AI Systems Built for <span class="gradient-text">Industry-Specific Complexity</span>'
+          subtitle="We understand that every industry has unique data, compliance, and operational constraints. Our AI systems are built for yours."
+          className="mb-16"
+        />
 
-        {/* Header */}
-        <div className="text-center mb-16 animate-on-scroll">
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-indigo/10 border border-indigo/20 text-indigo-400 text-xs font-medium mb-4">
-            <span>Sector Expertise</span>
-          </div>
-          <h2 className="section-heading mb-4">
-            <span className="text-white">Industries </span>
-            <span className="gradient-text">We Serve</span>
-          </h2>
-          <p className="section-subheading">
-            Specialized AI solutions across diverse sectors — built for the unique challenges of each industry.
-          </p>
-        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          {INDUSTRIES.map((ind, i) => (
+            <motion.div
+              key={ind.label}
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.55, delay: i * 0.07, ease: [0.16, 1, 0.3, 1] }}
+              whileHover={{ y: -5 }}
+              className="group relative rounded-2xl p-5 flex flex-col gap-4 overflow-hidden cursor-default"
+              style={{
+                background: 'rgba(255,255,255,0.025)',
+                border: '1px solid rgba(255,255,255,0.055)',
+                transition: 'all 0.4s cubic-bezier(0.16,1,0.3,1)',
+              }}
+            >
+              {/* Hover overlay */}
+              <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-400 pointer-events-none"
+                style={{ background: `radial-gradient(ellipse at 0% 0%, ${ind.color}10 0%, transparent 70%)` }} />
+              <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-400 pointer-events-none"
+                style={{ boxShadow: `inset 0 0 0 1px ${ind.color}35` }} />
 
-        {/* Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
-          {INDUSTRIES.map((industry, i) => {
-            const Icon = industry.icon
-            return (
-              <article
-                key={industry.title}
-                className="animate-on-scroll group relative rounded-2xl p-6 border border-white/10 backdrop-blur-lg bg-gradient-to-br from-[#111827] to-[#1f2937] hover:border-purple-500/50 hover:scale-105 transition-all duration-300 cursor-default"
-                style={{ transitionDelay: `${i * 60}ms` }}
-              >
-                {/* Gradient overlay on hover */}
-                <div
-                  className={`absolute inset-0 rounded-2xl bg-gradient-to-br ${industry.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-300`}
-                  aria-hidden="true"
-                />
+              {/* Icon */}
+              <div className="w-10 h-10 rounded-xl flex items-center justify-center"
+                style={{ background: `${ind.color}14`, border: `1px solid ${ind.color}28` }}>
+                <ind.icon size={18} style={{ color: ind.color }} />
+              </div>
 
-                <div className="relative z-10">
-                  {/* Icon */}
-                  <div className="mb-4 group-hover:scale-110 transition-transform duration-300 inline-block">
-                    <Icon
-                      className={`w-8 h-8 ${industry.iconColor}`}
-                      aria-hidden="true"
-                    />
-                  </div>
+              {/* Label */}
+              <h3 className="font-semibold text-white text-sm">{ind.label}</h3>
 
-                  {/* Title */}
-                  <h3 className="text-white font-semibold text-lg mb-2 leading-snug">
-                    {industry.title}
-                  </h3>
+              {/* Use cases */}
+              <ul className="flex flex-col gap-1.5">
+                {ind.useCases.map(uc => (
+                  <li key={uc} className="flex items-start gap-2 text-xs text-white/40">
+                    <span className="mt-1.5 w-1 h-1 rounded-full flex-shrink-0" style={{ background: ind.color, opacity: 0.6 }} />
+                    {uc}
+                  </li>
+                ))}
+              </ul>
 
-                  {/* Description */}
-                  <p className="text-gray-400 text-sm leading-relaxed">
-                    {industry.description}
-                  </p>
-                </div>
-              </article>
-            )
-          })}
+              {/* Metric */}
+              <div className="mt-auto">
+                <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-semibold"
+                  style={{ background: `${ind.color}12`, border: `1px solid ${ind.color}25`, color: ind.color }}>
+                  ↑ {ind.metric}
+                </span>
+              </div>
+            </motion.div>
+          ))}
         </div>
       </div>
     </section>

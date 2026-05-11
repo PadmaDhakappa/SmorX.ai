@@ -1,122 +1,158 @@
-import { useState, useEffect } from 'react'
-import { ArrowRight, Sparkles, ChevronDown } from 'lucide-react'
+import { useEffect, useState } from 'react'
+import { motion } from 'framer-motion'
+import { ArrowRight, ChevronDown, Zap, Shield, Activity, Users } from 'lucide-react'
+import AnimatedGridBackground from '../components/ui/AnimatedGridBackground'
+import CinematicBackground from '../components/visuals/CinematicBackground'
+import BrandName from '../components/BrandName'
 
-const ANIMATED_WORDS = ['Intelligent', 'Innovative', 'Transformative', 'Autonomous']
+const METRICS = [
+  { icon: Zap, label: '100+ AI Models Deployed', color: 'violet' },
+  { icon: Shield, label: '99.9% Uptime SLA', color: 'cyan' },
+  { icon: Activity, label: '50+ Enterprise Workflows', color: 'blue' },
+  { icon: Users, label: '24/7 Intelligent Operations', color: 'violet' },
+]
+
+const WORDS = ['Autonomous', 'Intelligent', 'Agentic', 'Enterprise-Grade']
 
 export default function Hero() {
-  const [wordIndex, setWordIndex] = useState(0)
-  const [visible, setVisible] = useState(true)
+  const [wordIdx, setWordIdx] = useState(0)
+  const [fade, setFade] = useState(true)
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setVisible(false)
-      setTimeout(() => {
-        setWordIndex((i) => (i + 1) % ANIMATED_WORDS.length)
-        setVisible(true)
-      }, 300)
+    const id = setInterval(() => {
+      setFade(false)
+      setTimeout(() => { setWordIdx(i => (i + 1) % WORDS.length); setFade(true) }, 300)
     }, 2800)
-    return () => clearInterval(interval)
+    return () => clearInterval(id)
   }, [])
 
-  const handleScroll = (id) => {
-    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' })
+  const scrollTo = (href) => {
+    const el = document.querySelector(href)
+    if (el) el.scrollIntoView({ behavior: 'smooth' })
   }
 
   return (
-    <section
-      id="home"
-      className="relative min-h-screen flex flex-col justify-center overflow-hidden bg-dark"
-      aria-label="Hero section"
-    >
-      <div className="absolute inset-0 bg-mesh" aria-hidden="true" />
-      <div
-        className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-3xl h-[400px] opacity-25 pointer-events-none"
-        style={{ background: 'radial-gradient(ellipse at 50% 0%, rgba(139,92,246,0.4) 0%, transparent 70%)' }}
-        aria-hidden="true"
-      />
-      <div
-        className="absolute inset-0 opacity-[0.02]"
-        style={{
-          backgroundImage: `linear-gradient(rgba(255,255,255,0.8) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.8) 1px, transparent 1px)`,
-          backgroundSize: '60px 60px',
-        }}
-        aria-hidden="true"
-      />
+    <section id="home" className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden" style={{ background: '#060A12' }}>
+      {/* ── Cinematic animated background (replaces video) ── */}
+      <CinematicBackground />
 
-      {/* Content */}
-      <div className="relative z-10 max-w-5xl mx-auto w-full px-4 sm:px-6 lg:px-8 pt-32 sm:pt-36 pb-16 sm:pb-20 text-center">
+      {/* Overlay to darken canvas so text reads clearly */}
+      <div className="absolute inset-0 pointer-events-none"
+        style={{ background: 'linear-gradient(180deg, rgba(6,10,18,0.55) 0%, rgba(6,10,18,0.35) 40%, rgba(6,10,18,0.65) 100%)' }} />
 
-        {/* Badge */}
-        <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full glass border border-purple/25 text-xs sm:text-sm text-purple-300 mb-6 sm:mb-7">
-          <Sparkles className="w-3 h-3 sm:w-3.5 sm:h-3.5 shrink-0" aria-hidden="true" />
-          <span className="font-medium">Powered by Advanced AI Technology</span>
-        </div>
+      {/* Vignette edges */}
+      <div className="absolute inset-0 pointer-events-none"
+        style={{ background: 'radial-gradient(ellipse at 50% 50%, transparent 40%, rgba(6,10,18,0.6) 100%)' }} />
 
-        {/* Headline */}
-        <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold tracking-heading leading-[1.1] mb-5 sm:mb-6 text-balance">
-          <span className="block text-white">Next Generation</span>
-          <span className="block mt-1 sm:mt-1.5">
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-28 pb-16">
+        <div className="flex flex-col items-center text-center gap-8">
+
+          {/* Label */}
+          <motion.span
+            className="section-label"
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+          >
+            <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
+            Next-Generation AI Infrastructure
+          </motion.span>
+
+          {/* Headline */}
+          <motion.h1
+            className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.06] text-balance max-w-5xl"
+            style={{ letterSpacing: '-0.03em' }}
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
+          >
             <span
-              className={`gradient-text transition-opacity duration-300 ${visible ? 'opacity-100' : 'opacity-0'}`}
-              aria-live="polite"
-              aria-atomic="true"
+              style={{ opacity: fade ? 1 : 0, transition: 'opacity 0.3s', display: 'inline-block' }}
+              className="gradient-text"
             >
-              {ANIMATED_WORDS[wordIndex]}
+              {WORDS[wordIdx]}
+            </span>{' '}
+            <span className="text-white">AI Systems</span>
+            <br className="hidden sm:block" />
+            <span style={{ fontSize: '0.78em', display: 'block', marginTop: '0.35em' }}>
+              <span className="text-white">for the Next </span>
+              <span className="gradient-text-cyan">Enterprise Era</span>
             </span>
-          </span>
-          <span className="block text-white mt-1 sm:mt-1.5">AI Solutions</span>
-        </h1>
+          </motion.h1>
 
-        {/* Subtext */}
-        <p className="text-sm sm:text-base md:text-lg text-white/55 max-w-xl sm:max-w-2xl mx-auto mb-8 sm:mb-10 leading-relaxed">
-          We build AI systems that automate decisions, optimize operations, and deliver measurable business outcomes.
-        </p>
-
-        {/* CTA Buttons */}
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-12 sm:mb-16">
-          <button
-            onClick={() => handleScroll('services')}
-            className="btn-primary w-full sm:w-auto px-6 sm:px-7 py-3 sm:py-3.5 group"
-            aria-label="Explore our services"
+          {/* Sub */}
+          <motion.p
+            className="text-base sm:text-lg lg:text-xl text-white/50 max-w-2xl leading-relaxed"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.25 }}
           >
-            Explore Services
-            <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" aria-hidden="true" />
-          </button>
-          <button
-            onClick={() => handleScroll('contact')}
-            className="btn-outline w-full sm:w-auto px-6 sm:px-7 py-3 sm:py-3.5"
-            aria-label="Get in touch"
-          >
-            Get in Touch
-          </button>
-        </div>
+            <BrandName suffix=".ai" /> designs intelligent agents, workflow automation, and AI decision
+            infrastructure that turn complex business operations into measurable outcomes.
+          </motion.p>
 
-        {/* Stats strip */}
-        <div className="flex items-center justify-center">
-          {[
-            { value: '100+', label: 'AI Models' },
-            { value: '99.9%', label: 'Uptime SLA' },
-            { value: '50+', label: 'Clients' },
-          ].map(({ value, label }, i) => (
-            <div key={label} className="flex items-center">
-              <div className="px-4 sm:px-6 text-center">
-                <div className="text-xl sm:text-2xl font-bold text-white tracking-tight">{value}</div>
-                <div className="text-[10px] sm:text-xs text-white/40 mt-0.5">{label}</div>
-              </div>
-              {i < 2 && <div className="h-7 w-px bg-white/10" aria-hidden="true" />}
-            </div>
-          ))}
+          {/* CTAs */}
+          <motion.div
+            className="flex flex-col sm:flex-row items-center gap-4"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.35 }}
+          >
+            <motion.button
+              onClick={() => scrollTo('#contact')}
+              className="btn-primary px-8 py-4 text-base rounded-xl"
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.97 }}
+            >
+              Build My AI System
+              <ArrowRight size={18} />
+            </motion.button>
+            <motion.button
+              onClick={() => scrollTo('#services')}
+              className="btn-outline px-8 py-4 text-base rounded-xl"
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.97 }}
+            >
+              Explore Solutions
+            </motion.button>
+          </motion.div>
+
+          {/* Metric badges */}
+          <motion.div
+            className="flex flex-wrap justify-center gap-3"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.5 }}
+          >
+            {METRICS.map((m, i) => (
+              <motion.div
+                key={m.label}
+                initial={{ opacity: 0, scale: 0.88 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.55 + i * 0.08 }}
+                className="flex items-center gap-2 px-4 py-2 rounded-full glass border border-white/[0.07] text-xs font-medium text-white/65 hover:border-violet-500/30 hover:text-white/80 transition-all duration-300"
+              >
+                <m.icon size={12} className={
+                  m.color === 'cyan' ? 'text-cyan-400' : m.color === 'blue' ? 'text-blue-400' : 'text-violet-400'
+                } />
+                {m.label}
+              </motion.div>
+            ))}
+          </motion.div>
+
         </div>
       </div>
 
       {/* Scroll indicator */}
-      <button
-        onClick={() => handleScroll('about')}
-        className="absolute bottom-6 sm:bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1.5 text-white/25 hover:text-white/50 transition-colors duration-300"
-        aria-label="Scroll down"
+      <motion.button
+        onClick={() => scrollTo('#control-plane')}
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-white/25 hover:text-white/50 transition-colors cursor-pointer"
+        animate={{ y: [0, 6, 0] }}
+        transition={{ duration: 2.2, repeat: Infinity, ease: 'easeInOut' }}
       >
-        <ChevronDown className="w-5 h-5 animate-bounce" aria-hidden="true" />
-      </button>
+        <span className="text-[10px] tracking-widest uppercase">Scroll</span>
+        <ChevronDown size={15} />
+      </motion.button>
     </section>
   )
 }

@@ -1,232 +1,155 @@
-import { useEffect, useRef } from 'react'
-import { ExternalLink, Factory, Heart, TrendingUp, Car, Building2, ShoppingBag } from 'lucide-react'
+import { lazy, Suspense } from 'react'
+import { motion } from 'framer-motion'
+import { Factory, Heart, Building2, ShoppingBag, ArrowUpRight } from 'lucide-react'
+import SectionHeader from '../components/ui/SectionHeader'
+import ManufacturingAI from '../components/visuals/ManufacturingAI'
+import HealthcareAI from '../components/visuals/HealthcareAI'
+import FinancialRisk from '../components/visuals/FinancialRisk'
+import EcommerceAI from '../components/visuals/EcommerceAI'
 
 const STORIES = [
   {
-    title: 'Smart Manufacturing',
-    description:
-      'Implemented AI driven quality control system resulting in 40% reduction in defects and 25% increase in production efficiency.',
-    category: 'Manufacturing',
-    categoryColor: 'text-blue-400 bg-blue-400/10 border-blue-400/20',
-    Icon: Factory,
-    gradientFrom: '#1e3a5f',
-    gradientTo: '#0f2027',
-    iconColor: 'text-blue-400',
-    glowColor: 'rgba(59,130,246,0.15)',
-    stats: [
-      { value: '40%', label: 'Fewer defects' },
-      { value: '25%', label: 'More efficient' },
+    icon: Factory,
+    industry: 'Manufacturing',
+    title: 'Smart Manufacturing Intelligence',
+    problem: 'Manual quality checks and fragmented production data slowed decision-making across 14 plants.',
+    solution: 'AI quality-control system with anomaly detection and predictive maintenance across the full production chain.',
+    metrics: [
+      { value: '40%', label: 'Fewer Defects' },
+      { value: '25%', label: 'Production Efficiency' },
+      { value: '30%', label: 'Faster Issue Detection' },
     ],
+    Visual: ManufacturingAI,
+    color: '#8B5CF6',
   },
   {
-    title: 'Healthcare Diagnostics',
-    description:
-      'Developed AI powered diagnostic system that improved accuracy by 35% and reduced diagnosis time by 60%.',
-    category: 'Healthcare',
-    categoryColor: 'text-rose-400 bg-rose-400/10 border-rose-400/20',
-    Icon: Heart,
-    gradientFrom: '#3b1f2b',
-    gradientTo: '#1a0f14',
-    iconColor: 'text-rose-400',
-    glowColor: 'rgba(251,113,133,0.15)',
-    stats: [
-      { value: '35%', label: 'More accurate' },
-      { value: '60%', label: 'Faster diagnosis' },
+    icon: Heart,
+    industry: 'Healthcare',
+    title: 'Healthcare Diagnostic Automation',
+    problem: 'Delayed diagnosis workflows and high manual review burden reduced care quality and physician throughput.',
+    solution: 'AI diagnostic support system with structured triage, clinical insights, and automated documentation.',
+    metrics: [
+      { value: '35%', label: 'Accuracy Improvement' },
+      { value: '60%', label: 'Faster Diagnosis' },
+      { value: '50%', label: 'Workload Reduction' },
     ],
+    Visual: HealthcareAI,
+    color: '#F43F5E',
   },
   {
-    title: 'Financial Analytics',
-    description:
-      'Built predictive models for risk assessment that reduced losses by 30% and improved portfolio performance.',
-    category: 'Finance',
-    categoryColor: 'text-emerald-400 bg-emerald-400/10 border-emerald-400/20',
-    Icon: TrendingUp,
-    gradientFrom: '#1a3329',
-    gradientTo: '#0d1f18',
-    iconColor: 'text-emerald-400',
-    glowColor: 'rgba(52,211,153,0.15)',
-    stats: [
-      { value: '30%', label: 'Loss reduction' },
-      { value: '2.4x', label: 'Portfolio gains' },
+    icon: Building2,
+    industry: 'Financial Services',
+    title: 'Financial Risk Intelligence',
+    problem: 'Manual risk scoring created approval delays and introduced inconsistency across lending and portfolio teams.',
+    solution: 'Predictive AI models for real-time risk analysis, anomaly detection, and regulatory reporting automation.',
+    metrics: [
+      { value: '30%', label: 'Loss Reduction' },
+      { value: '2.4×', label: 'Portfolio Performance' },
+      { value: '50M', label: 'Records Processed Daily' },
     ],
+    Visual: FinancialRisk,
+    color: '#3B82F6',
   },
   {
-    title: 'Autonomous Systems',
-    description:
-      'Developed self driving algorithms that achieved 99.9% safety rating in controlled test environments.',
-    category: 'Automotive',
-    categoryColor: 'text-purple-400 bg-purple-400/10 border-purple-400/20',
-    Icon: Car,
-    gradientFrom: '#2d1f4a',
-    gradientTo: '#18102a',
-    iconColor: 'text-purple-400',
-    glowColor: 'rgba(167,139,250,0.15)',
-    stats: [
-      { value: '99.9%', label: 'Safety rating' },
-      { value: '0ms', label: 'Reaction delay' },
+    icon: ShoppingBag,
+    industry: 'Multi-Agent Platform',
+    title: 'E-commerce Personalization Engine',
+    problem: 'Low conversion rates and inconsistent customer experiences across channels impacted growth.',
+    solution: 'Multi-agent recommendation and customer intelligence network delivering real-time personalization at scale.',
+    metrics: [
+      { value: '55%', label: 'Conversion Increase' },
+      { value: '40%', label: 'Customer Satisfaction' },
+      { value: '3×', label: 'Repeat Engagement' },
     ],
-  },
-  {
-    title: 'Smart City Solutions',
-    description:
-      'Implemented IoT and AI integration for traffic optimization, reducing congestion by 45% citywide.',
-    category: 'Smart Cities',
-    categoryColor: 'text-sky-400 bg-sky-400/10 border-sky-400/20',
-    Icon: Building2,
-    gradientFrom: '#1a2f45',
-    gradientTo: '#0e1b28',
-    iconColor: 'text-sky-400',
-    glowColor: 'rgba(56,189,248,0.15)',
-    stats: [
-      { value: '45%', label: 'Less congestion' },
-      { value: '3M+', label: 'Residents impacted' },
-    ],
-  },
-  {
-    title: 'E-commerce Optimization',
-    description:
-      'Created personalization engine that increased conversion rates by 55% and customer satisfaction by 40%.',
-    category: 'E-commerce',
-    categoryColor: 'text-orange-400 bg-orange-400/10 border-orange-400/20',
-    Icon: ShoppingBag,
-    gradientFrom: '#3b2010',
-    gradientTo: '#1f1008',
-    iconColor: 'text-orange-400',
-    glowColor: 'rgba(251,146,60,0.15)',
-    stats: [
-      { value: '55%', label: 'More conversions' },
-      { value: '40%', label: 'Higher satisfaction' },
-    ],
+    Visual: EcommerceAI,
+    color: '#F97316',
   },
 ]
 
 export default function SuccessStoriesSection() {
-  const sectionRef = useRef(null)
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) entry.target.classList.add('visible')
-        })
-      },
-      { threshold: 0.1, rootMargin: '0px 0px -60px 0px' }
-    )
-    const elements = sectionRef.current?.querySelectorAll('.animate-on-scroll')
-    elements?.forEach((el) => observer.observe(el))
-    return () => observer.disconnect()
-  }, [])
-
   return (
-    <section
-      id="success-stories"
-      ref={sectionRef}
-      className="relative py-16 sm:py-20 lg:py-28 bg-dark overflow-hidden"
-      aria-label="Success stories"
-    >
-      {/* Background accents */}
-      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" aria-hidden="true" />
-      <div className="absolute top-1/2 right-0 w-96 h-96 bg-purple/5 rounded-full blur-3xl -translate-y-1/2" aria-hidden="true" />
-      <div className="absolute bottom-0 left-0 w-80 h-80 bg-primary/5 rounded-full blur-3xl" aria-hidden="true" />
+    <section id="case-studies" className="relative py-28 overflow-hidden" style={{ background: '#080D18' }}>
+      <div className="bg-grid absolute inset-0 pointer-events-none opacity-40" />
+      <div className="glow-spot-blue absolute w-[600px] h-[600px] top-0 right-0 opacity-20" />
+      <div className="glow-spot-violet absolute w-[600px] h-[600px] bottom-0 left-0 opacity-15" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <SectionHeader
+          label="Case Studies"
+          title='Real-World AI <span class="gradient-text">Transformation Stories</span>'
+          subtitle="Four industries. Four teams. One common outcome — measurable, documented business impact within weeks of deployment."
+          className="mb-16"
+        />
 
-        {/* Header */}
-        <div className="text-center mb-16 animate-on-scroll">
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-purple/10 border border-purple/20 text-purple-light text-xs font-medium mb-4">
-            <span>Case Studies</span>
-          </div>
-          <h2 className="section-heading mb-4">
-            <span className="text-white">Success </span>
-            <span className="gradient-text">Stories</span>
-          </h2>
-          <p className="section-subheading">
-            Real world applications of our AI solutions across industries. Measured impact, proven results.
-          </p>
-        </div>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
+          {STORIES.map((story, i) => (
+            <motion.div
+              key={story.title}
+              initial={{ opacity: 0, y: 32 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.65, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] }}
+              whileHover={{ y: -4 }}
+              className="group relative rounded-2xl overflow-hidden flex flex-col cursor-default"
+              style={{
+                background: 'rgba(255,255,255,0.025)',
+                border: '1px solid rgba(255,255,255,0.06)',
+                transition: 'all 0.4s cubic-bezier(0.16,1,0.3,1)',
+              }}
+            >
+              {/* Animated visual header */}
+              <div className="relative overflow-hidden flex-shrink-0">
+                <story.Visual className="w-full rounded-none" />
+                {/* Industry label overlay */}
+                <div className="absolute top-3 left-3">
+                  <div className="flex items-center gap-2 px-2.5 py-1.5 rounded-lg glass border border-white/[0.08]">
+                    <story.icon size={12} style={{ color: story.color }} />
+                    <span className="text-[10px] font-semibold text-white/60 uppercase tracking-wider">{story.industry}</span>
+                  </div>
+                </div>
+              </div>
 
-        {/* Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {STORIES.map((story, i) => {
-            const Icon = story.Icon
-            return (
-              <article
-                key={story.title}
-                className="animate-on-scroll group flex flex-col rounded-2xl border border-white/10 bg-gradient-to-br from-[#111827] to-[#1f2937] overflow-hidden hover:scale-[1.02] hover:border-purple-500/50 transition-all duration-300"
-                style={{
-                  transitionDelay: `${i * 80}ms`,
-                }}
-              >
-                {/* Image area — rich gradient with icon */}
-                <div
-                  className="relative h-36 sm:h-44 md:h-48 w-full overflow-hidden flex items-center justify-center"
-                  style={{
-                    background: `linear-gradient(135deg, ${story.gradientFrom}, ${story.gradientTo})`,
-                  }}
+              {/* Body */}
+              <div className="p-6 flex flex-col gap-5 flex-1">
+                <h3 className="font-bold text-white text-base leading-snug">{story.title}</h3>
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <div className="text-[10px] font-semibold text-white/30 uppercase tracking-wider mb-1.5">Problem</div>
+                    <p className="text-xs text-white/50 leading-relaxed">{story.problem}</p>
+                  </div>
+                  <div>
+                    <div className="text-[10px] font-semibold text-white/30 uppercase tracking-wider mb-1.5">Solution</div>
+                    <p className="text-xs text-white/50 leading-relaxed">{story.solution}</p>
+                  </div>
+                </div>
+
+                {/* Metrics */}
+                <div className="grid grid-cols-3 gap-3 mt-auto">
+                  {story.metrics.map(m => (
+                    <div key={m.label} className="rounded-xl p-3 text-center"
+                      style={{ background: `${story.color}0C`, border: `1px solid ${story.color}20` }}>
+                      <div className="text-xl font-bold mb-0.5" style={{ color: story.color }}>{m.value}</div>
+                      <div className="text-[10px] text-white/35 leading-tight">{m.label}</div>
+                    </div>
+                  ))}
+                </div>
+
+                <button
+                  onClick={() => document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' })}
+                  className="flex items-center gap-1.5 text-xs font-medium transition-colors duration-200 mt-1"
+                  style={{ color: `${story.color}80` }}
+                  onMouseEnter={e => e.currentTarget.style.color = story.color}
+                  onMouseLeave={e => e.currentTarget.style.color = `${story.color}80`}
                 >
-                  {/* Grid pattern overlay */}
-                  <div
-                    className="absolute inset-0 opacity-10"
-                    style={{
-                      backgroundImage: `linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)`,
-                      backgroundSize: '30px 30px',
-                    }}
-                    aria-hidden="true"
-                  />
+                  Get a similar outcome <ArrowUpRight size={12} />
+                </button>
+              </div>
 
-                  {/* Glow blob */}
-                  <div
-                    className="absolute inset-0 opacity-60"
-                    style={{
-                      background: `radial-gradient(circle at 50% 50%, ${story.glowColor}, transparent 70%)`,
-                    }}
-                    aria-hidden="true"
-                  />
-
-                  {/* Icon */}
-                  <div className="relative z-10 w-16 h-16 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center backdrop-blur-sm group-hover:scale-110 transition-transform duration-300">
-                    <Icon className={`w-8 h-8 ${story.iconColor}`} aria-hidden="true" />
-                  </div>
-
-                  {/* Bottom gradient fade */}
-                  <div className="absolute bottom-0 left-0 right-0 h-12 bg-gradient-to-t from-[#111827] to-transparent" aria-hidden="true" />
-                </div>
-
-                {/* Content */}
-                <div className="flex flex-col flex-1 p-6">
-                  <h3 className="text-white font-semibold text-lg mb-2 leading-snug">
-                    {story.title}
-                  </h3>
-                  <p className="text-gray-400 text-sm leading-relaxed mb-5 flex-1">
-                    {story.description}
-                  </p>
-
-                  {/* Stats row */}
-                  <div className="flex gap-4 mb-5">
-                    {story.stats.map(({ value, label }) => (
-                      <div key={label} className="flex-1 bg-white/5 rounded-xl px-3 py-2 text-center">
-                        <div className={`text-lg font-bold ${story.iconColor}`}>{value}</div>
-                        <div className="text-xs text-white/30 mt-0.5">{label}</div>
-                      </div>
-                    ))}
-                  </div>
-
-                  {/* Footer row */}
-                  <div className="flex items-center justify-between">
-                    <span className={`inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium border ${story.categoryColor}`}>
-                      {story.category}
-                    </span>
-                    <button
-                      className="w-8 h-8 rounded-lg bg-white/5 flex items-center justify-center text-white/30 hover:text-white hover:bg-white/10 transition-all duration-200 group-hover:text-white/60"
-                      aria-label={`View ${story.title} case study`}
-                    >
-                      <ExternalLink className="w-4 h-4" aria-hidden="true" />
-                    </button>
-                  </div>
-                </div>
-              </article>
-            )
-          })}
+              {/* Hover border */}
+              <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-400 pointer-events-none"
+                style={{ boxShadow: `inset 0 0 0 1px ${story.color}40` }} />
+            </motion.div>
+          ))}
         </div>
       </div>
     </section>
