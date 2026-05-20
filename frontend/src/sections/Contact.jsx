@@ -130,7 +130,7 @@ export default function Contact() {
             >
               {[
                 { icon: Mail, label: 'Email', value: 'outreach@smorx.ai', note: 'Responds within 4 hours' },
-                { icon: Phone, label: 'Phone', value: '+91 80812 59071', note: 'Mon–Fri, 9am–6pm IST' },
+                { icon: Phone, label: 'Phone', value: '+91 8147681616', note: 'Mon–Fri, 9am–6pm IST' },
                 { icon: MapPin, label: 'Office', value: 'Bangalore, India', note: 'Remote-first, global delivery' },
               ].map(item => (
                 <div key={item.label} className="flex items-start gap-3.5">
