@@ -12,4 +12,18 @@ export default defineConfig({
       },
     },
   },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          'vendor-react': ['react', 'react-dom', 'react-router-dom', 'react-helmet-async'],
+          'vendor-animation': ['framer-motion'],
+          'vendor-icons': ['lucide-react'],
+        },
+      },
+    },
+    cssCodeSplit: true,
+    chunkSizeWarningLimit: 1000,
+    minify: 'esbuild',
+  },
 })

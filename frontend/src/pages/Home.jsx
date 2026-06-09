@@ -2,6 +2,7 @@ import { Suspense, lazy } from 'react'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import Hero from '../sections/Hero'
+import SEO from '../components/SEO'
 
 const ControlPlane = lazy(() => import('../sections/ControlPlane'))
 const AIServicesSection = lazy(() => import('../sections/AIServicesSection'))
@@ -12,6 +13,33 @@ const SuccessStoriesSection = lazy(() => import('../sections/SuccessStoriesSecti
 const BlogSection = lazy(() => import('../sections/BlogSection'))
 const Trust = lazy(() => import('../sections/Trust'))
 const Contact = lazy(() => import('../sections/Contact'))
+
+const HOME_WEBPAGE_SCHEMA = {
+  '@context': 'https://schema.org',
+  '@type': 'WebPage',
+  '@id': 'https://smorx.ai/#webpage',
+  url: 'https://smorx.ai/',
+  name: 'Enterprise AI Automation Platform & AI Agent Infrastructure | SmorX.ai',
+  description:
+    'SmorX.ai builds enterprise AI automation platforms, AI agents, multi-agent workflows, and intelligent decision infrastructure for modern enterprises.',
+  isPartOf: { '@id': 'https://smorx.ai/#website' },
+  about: { '@id': 'https://smorx.ai/#organization' },
+  primaryImageOfPage: {
+    '@type': 'ImageObject',
+    url: 'https://smorx.ai/og-image.png',
+  },
+  breadcrumb: {
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: 'Home',
+        item: 'https://smorx.ai/',
+      },
+    ],
+  },
+}
 
 function SectionLoader() {
   return (
@@ -24,8 +52,14 @@ function SectionLoader() {
 export default function Home() {
   return (
     <>
+      <SEO
+        title="Enterprise AI Automation Platform & AI Agent Infrastructure"
+        description="SmorX.ai builds enterprise AI automation platforms, AI agents, multi-agent workflows, and intelligent decision infrastructure for modern enterprises."
+        canonical="/"
+        extraSchema={HOME_WEBPAGE_SCHEMA}
+      />
       <Navbar />
-      <main>
+      <main id="main-content">
         <Hero />
 
         <Suspense fallback={<SectionLoader />}>

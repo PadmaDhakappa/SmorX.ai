@@ -32,11 +32,11 @@ export default function Hero() {
   }
 
   return (
-    <section id="home" className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden" style={{ background: '#060A12' }}>
-      {/* ── Cinematic animated background (replaces video) ── */}
+    <section id="home" aria-label="Hero" className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden" style={{ background: '#060A12' }}>
+      {/* Cinematic animated background */}
       <CinematicBackground />
 
-      {/* Overlay to darken canvas so text reads clearly */}
+      {/* Overlay */}
       <div className="absolute inset-0 pointer-events-none"
         style={{ background: 'linear-gradient(180deg, rgba(6,10,18,0.55) 0%, rgba(6,10,18,0.35) 40%, rgba(6,10,18,0.65) 100%)' }} />
 
@@ -58,7 +58,7 @@ export default function Hero() {
             Next-Generation AI Infrastructure
           </motion.span>
 
-          {/* Headline */}
+          {/* H1 — primary keyword: Enterprise AI Automation Platform */}
           <motion.h1
             className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.06] text-balance max-w-5xl"
             style={{ letterSpacing: '-0.03em' }}
@@ -72,23 +72,23 @@ export default function Hero() {
             >
               {WORDS[wordIdx]}
             </span>{' '}
-            <span className="text-white">AI Systems</span>
+            <span className="text-white">Enterprise AI</span>
             <br className="hidden sm:block" />
             <span style={{ fontSize: '0.78em', display: 'block', marginTop: '0.35em' }}>
-              <span className="text-white">for the Next </span>
-              <span className="gradient-text-cyan">Enterprise Era</span>
+              <span className="text-white">Automation </span>
+              <span className="gradient-text-cyan">Platform</span>
             </span>
           </motion.h1>
 
-          {/* Sub */}
+          {/* Subheading */}
           <motion.p
             className="text-base sm:text-lg lg:text-xl text-white/50 max-w-2xl leading-relaxed"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.25 }}
           >
-            <BrandName suffix=".ai" /> designs intelligent agents, workflow automation, and AI decision
-            infrastructure that turn complex business operations into measurable outcomes.
+            <BrandName suffix=".ai" /> designs intelligent AI agents, multi-agent workflow automation, and AI decision
+            infrastructure that turn complex enterprise operations into measurable outcomes.
           </motion.p>
 
           {/* CTAs */}
@@ -103,6 +103,7 @@ export default function Hero() {
               className="btn-primary px-8 py-4 text-base rounded-xl"
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.97 }}
+              aria-label="Build my AI system — contact us"
             >
               Build My AI System
               <ArrowRight size={18} />
@@ -112,6 +113,7 @@ export default function Hero() {
               className="btn-outline px-8 py-4 text-base rounded-xl"
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.97 }}
+              aria-label="Explore AI solutions"
             >
               Explore Solutions
             </motion.button>
@@ -149,6 +151,7 @@ export default function Hero() {
         className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-white/25 hover:text-white/50 transition-colors cursor-pointer"
         animate={{ y: [0, 6, 0] }}
         transition={{ duration: 2.2, repeat: Infinity, ease: 'easeInOut' }}
+        aria-label="Scroll to next section"
       >
         <span className="text-[10px] tracking-widest uppercase">Scroll</span>
         <ChevronDown size={15} />

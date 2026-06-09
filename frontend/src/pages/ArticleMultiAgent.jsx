@@ -5,6 +5,7 @@ import { motion } from 'framer-motion'
 import MultiAgentOrgLayer from '../components/visuals/MultiAgentOrgLayer'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
+import SEO from '../components/SEO'
 
 const SECTIONS = [
   {
@@ -70,10 +71,27 @@ export default function ArticleMultiAgent() {
 
   return (
     <div style={{ background: '#060A12', minHeight: '100vh' }}>
+      <SEO
+        title="Why Multi-Agent Systems Are the New Business Operating Layer"
+        description="Single-model AI is table stakes. The companies pulling ahead are building coordinated agent networks that mirror human organizational structures."
+        canonical="/blog/multi-agent-systems"
+        type="article"
+        article={{
+          headline: 'Why Multi-Agent Systems Are the New Business Operating Layer',
+          datePublished: '2026-04-15',
+          dateModified: '2026-05-12',
+        }}
+        breadcrumbs={[
+          { name: 'Home', path: '/' },
+          { name: 'Blog', path: '/#blog' },
+          { name: 'Multi-Agent Systems', path: '/blog/multi-agent-systems' },
+        ]}
+      />
       <Navbar />
 
       {/* Article body */}
-      <div className="relative z-10 max-w-3xl mx-auto px-4 sm:px-6 pb-28 pt-32">
+      <main id="main-content">
+      <article className="relative z-10 max-w-3xl mx-auto px-4 sm:px-6 pb-28 pt-32">
 
         {/* Back link */}
         <motion.div variants={fadeUp} initial="hidden" animate="show" custom={0} className="mb-10">
@@ -190,7 +208,8 @@ export default function ArticleMultiAgent() {
             Talk to us
           </Link>
         </motion.div>
-      </div>
+      </article>
+      </main>
 
       <Footer />
     </div>

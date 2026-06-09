@@ -130,7 +130,7 @@ export default function Contact() {
             >
               {[
                 { icon: Mail, label: 'Email', value: 'outreach@smorx.ai', note: 'Responds within 4 hours' },
-                { icon: Phone, label: 'Phone', value: '+91 80812 59071', note: 'Mon–Fri, 9am–6pm IST' },
+                { icon: Phone, label: 'Phone', value: '+91 8147681616', note: 'Mon–Fri, 9am–6pm IST' },
                 { icon: MapPin, label: 'Office', value: 'Bangalore, India', note: 'Remote-first, global delivery' },
               ].map(item => (
                 <div key={item.label} className="flex items-start gap-3.5">
@@ -171,34 +171,37 @@ export default function Contact() {
                 </button>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-5">
+              <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-5" aria-label="Contact SmorX.ai">
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-xs text-white/45 mb-1.5 font-medium">Name *</label>
-                    <input name="name" value={form.name} onChange={handleChange}
-                      placeholder="Jane Smith" className={inputCls('name')} aria-required />
-                    {errors.name && <p className="text-xs text-red-400 mt-1">{errors.name}</p>}
+                    <label htmlFor="contact-name" className="block text-xs text-white/45 mb-1.5 font-medium">Name *</label>
+                    <input id="contact-name" name="name" value={form.name} onChange={handleChange}
+                      placeholder="Jane Smith" className={inputCls('name')} aria-required="true"
+                      aria-invalid={!!errors.name} aria-describedby={errors.name ? 'err-name' : undefined} />
+                    {errors.name && <p id="err-name" role="alert" className="text-xs text-red-400 mt-1">{errors.name}</p>}
                   </div>
                   <div>
-                    <label className="block text-xs text-white/45 mb-1.5 font-medium">Email *</label>
-                    <input name="email" type="email" value={form.email} onChange={handleChange}
-                      placeholder="jane@company.com" className={inputCls('email')} aria-required />
-                    {errors.email && <p className="text-xs text-red-400 mt-1">{errors.email}</p>}
+                    <label htmlFor="contact-email" className="block text-xs text-white/45 mb-1.5 font-medium">Email *</label>
+                    <input id="contact-email" name="email" type="email" value={form.email} onChange={handleChange}
+                      placeholder="jane@company.com" className={inputCls('email')} aria-required="true"
+                      aria-invalid={!!errors.email} aria-describedby={errors.email ? 'err-email' : undefined} />
+                    {errors.email && <p id="err-email" role="alert" className="text-xs text-red-400 mt-1">{errors.email}</p>}
                   </div>
                 </div>
 
                 <div>
-                  <label className="block text-xs text-white/45 mb-1.5 font-medium">Company / Phone</label>
-                  <input name="phone" value={form.phone} onChange={handleChange}
+                  <label htmlFor="contact-phone" className="block text-xs text-white/45 mb-1.5 font-medium">Company / Phone</label>
+                  <input id="contact-phone" name="phone" value={form.phone} onChange={handleChange}
                     placeholder="Acme Corp or +1 555 000 0000" className={inputCls('phone')} />
                 </div>
 
                 <div>
-                  <label className="block text-xs text-white/45 mb-1.5 font-medium">Tell us about your workflow *</label>
-                  <textarea name="message" rows={5} value={form.message} onChange={handleChange}
+                  <label htmlFor="contact-message" className="block text-xs text-white/45 mb-1.5 font-medium">Tell us about your workflow *</label>
+                  <textarea id="contact-message" name="message" rows={5} value={form.message} onChange={handleChange}
                     placeholder="Describe the process you'd like to automate or the AI system you're looking to build..."
-                    className={`${inputCls('message')} resize-none`} aria-required />
-                  {errors.message && <p className="text-xs text-red-400 mt-1">{errors.message}</p>}
+                    className={`${inputCls('message')} resize-none`} aria-required="true"
+                    aria-invalid={!!errors.message} aria-describedby={errors.message ? 'err-message' : undefined} />
+                  {errors.message && <p id="err-message" role="alert" className="text-xs text-red-400 mt-1">{errors.message}</p>}
                 </div>
 
                 {status === 'error' && (

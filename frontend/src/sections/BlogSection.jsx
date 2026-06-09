@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { ArrowUpRight, Clock } from 'lucide-react'
 import SectionHeader from '../components/ui/SectionHeader'
 import MultiAgentOrgLayer from '../components/visuals/MultiAgentOrgLayer'
@@ -70,7 +70,6 @@ const POST_LINKS = [
 ]
 
 export default function BlogSection() {
-  const navigate = useNavigate()
   return (
     <section id="blog" className="relative py-28 overflow-hidden" style={{ background: '#060A12' }}>
       <div className="bg-grid absolute inset-0 pointer-events-none opacity-40" />
@@ -93,15 +92,12 @@ export default function BlogSection() {
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: i * 0.08, ease: [0.16, 1, 0.3, 1] }}
               whileHover={{ y: -4 }}
-              className="group relative rounded-2xl overflow-hidden flex flex-col cursor-pointer"
+              className="group relative rounded-2xl overflow-hidden flex flex-col"
               style={{
                 background: 'rgba(255,255,255,0.025)',
                 border: '1px solid rgba(255,255,255,0.06)',
                 transition: 'all 0.4s cubic-bezier(0.16,1,0.3,1)',
               }}
-              onClick={() => POST_LINKS[i]
-                ? navigate(POST_LINKS[i])
-                : document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' })}
             >
               {/* Image / gradient header */}
               <div className="h-40 relative overflow-hidden flex-shrink-0">
@@ -144,16 +140,31 @@ export default function BlogSection() {
                   </div>
                 </div>
 
-                <h3 className="font-semibold text-white text-sm leading-snug">{post.title}</h3>
+                <h3 className="font-semibold text-white text-sm leading-snug">
+                  {POST_LINKS[i] ? (
+                    <Link to={POST_LINKS[i]} className="hover:text-violet-300 transition-colors duration-200">
+                      {post.title}
+                    </Link>
+                  ) : post.title}
+                </h3>
                 <p className="text-xs text-white/40 leading-relaxed flex-1">{post.excerpt}</p>
 
-                <div className="flex items-center gap-1 text-xs font-medium transition-colors duration-200 mt-1"
-                  style={{ color: `${post.color}70` }}
-                  onMouseEnter={e => e.currentTarget.style.color = post.color}
-                  onMouseLeave={e => e.currentTarget.style.color = `${post.color}70`}
-                >
-                  Read Article <ArrowUpRight size={12} />
-                </div>
+                {POST_LINKS[i] ? (
+                  <Link
+                    to={POST_LINKS[i]}
+                    className="flex items-center gap-1 text-xs font-medium transition-colors duration-200 mt-1"
+                    style={{ color: `${post.color}70` }}
+                    onMouseEnter={e => e.currentTarget.style.color = post.color}
+                    onMouseLeave={e => e.currentTarget.style.color = `${post.color}70`}
+                    aria-label={`Read article: ${post.title}`}
+                  >
+                    Read Article <ArrowUpRight size={12} aria-hidden="true" />
+                  </Link>
+                ) : (
+                  <span className="flex items-center gap-1 text-xs font-medium mt-1" style={{ color: `${post.color}70` }}>
+                    Read Article <ArrowUpRight size={12} aria-hidden="true" />
+                  </span>
+                )}
               </div>
 
               {/* Hover border */}

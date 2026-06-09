@@ -5,6 +5,7 @@ import { motion } from 'framer-motion'
 import AgentsVsSoftware from '../components/visuals/AgentsVsSoftware'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
+import SEO from '../components/SEO'
 
 const SECTIONS = [
   {
@@ -71,9 +72,25 @@ export default function ArticleAgentsVsSoftware() {
 
   return (
     <div style={{ background: '#060A12', minHeight: '100vh' }}>
+      <SEO
+        title="AI Agents vs Traditional Software: What Changes in 2026"
+        description="Traditional software executes instructions. AI agents reason, adapt, and improve. The implications for software architecture are profound."
+        canonical="/blog/agents-vs-software"
+        type="article"
+        article={{
+          headline: 'AI Agents vs Traditional Software: What Changes in 2026',
+          datePublished: '2026-04-28',
+          dateModified: '2026-05-12',
+        }}
+        breadcrumbs={[
+          { name: 'Home', path: '/' },
+          { name: 'Blog', path: '/#blog' },
+          { name: 'AI Agents vs Software', path: '/blog/agents-vs-software' },
+        ]}
+      />
       <Navbar />
-
-      <div className="relative z-10 max-w-3xl mx-auto px-4 sm:px-6 pb-28 pt-32">
+      <main id="main-content">
+      <article className="relative z-10 max-w-3xl mx-auto px-4 sm:px-6 pb-28 pt-32">
 
         {/* Back link */}
         <motion.div variants={fadeUp} initial="hidden" animate="show" custom={0} className="mb-10">
@@ -190,7 +207,8 @@ export default function ArticleAgentsVsSoftware() {
             Talk to us
           </Link>
         </motion.div>
-      </div>
+      </article>
+      </main>
 
       <Footer />
     </div>

@@ -1,42 +1,44 @@
 import { motion } from 'framer-motion'
 import { Twitter, Linkedin, Github, Mail, ArrowRight } from 'lucide-react'
+import { Link } from 'react-router-dom'
 import BrandName from './BrandName'
 
 const FOOTER_LINKS = {
   Company: [
-    { label: 'About SmorX', display: <>About <BrandName /></>, href: '#home' },
-    { label: 'Our Mission', href: '#home' },
-    { label: 'Careers', href: '#contact' },
-    { label: 'Blog', href: '#blog' },
+    { label: 'About SmorX', href: '#home', scroll: true },
+    { label: 'Our Mission', href: '#home', scroll: true },
+    { label: 'Careers', href: '#contact', scroll: true },
+    { label: 'Blog', href: '#blog', scroll: true },
   ],
   Solutions: [
-    { label: 'Agentic Workflows', href: '#services' },
-    { label: 'Multi-Agent Systems', href: '#services' },
-    { label: 'AI Control Plane', href: '#control-plane' },
-    { label: 'Agent Marketplace', href: '#agents' },
-    { label: 'Data Intelligence', href: '#services' },
+    { label: 'Agentic Workflows', href: '#services', scroll: true },
+    { label: 'Multi-Agent Systems', href: '#services', scroll: true },
+    { label: 'AI Control Plane', href: '#control-plane', scroll: true },
+    { label: 'Agent Marketplace', href: '#agents', scroll: true },
+    { label: 'Data Intelligence', href: '#services', scroll: true },
   ],
   Industries: [
-    { label: 'Healthcare', href: '#industries' },
-    { label: 'Financial Services', href: '#industries' },
-    { label: 'Manufacturing', href: '#industries' },
-    { label: 'Retail & E-commerce', href: '#industries' },
-    { label: 'Logistics', href: '#industries' },
+    { label: 'Healthcare', href: '#industries', scroll: true },
+    { label: 'Financial Services', href: '#industries', scroll: true },
+    { label: 'Manufacturing', href: '#industries', scroll: true },
+    { label: 'Retail & E-commerce', href: '#industries', scroll: true },
+    { label: 'Logistics', href: '#industries', scroll: true },
+    { label: 'SaaS', href: '#industries', scroll: true },
   ],
-  Resources: [
-    { label: 'Case Studies', href: '#case-studies' },
-    { label: 'Insights', href: '#blog' },
-    { label: 'Documentation', href: '#contact' },
-    { label: 'Privacy Policy', href: '#contact' },
-    { label: 'Terms of Service', href: '#contact' },
+  Insights: [
+    { label: 'Multi-Agent Systems', href: '/blog/multi-agent-systems', scroll: false },
+    { label: 'Autonomous Workflows', href: '/blog/autonomous-workflows', scroll: false },
+    { label: 'AI Control Planes', href: '/blog/ai-control-planes', scroll: false },
+    { label: 'AI Agents vs Software', href: '/blog/agents-vs-software', scroll: false },
+    { label: 'Secure AI Agents', href: '/blog/secure-agents', scroll: false },
   ],
 }
 
 const SOCIAL = [
-  { icon: Twitter, label: 'Twitter', href: '#' },
-  { icon: Linkedin, label: 'LinkedIn', href: '#' },
-  { icon: Github, label: 'GitHub', href: '#' },
-  { icon: Mail, label: 'Email', href: 'mailto:outreach@smorx.ai' },
+  { icon: Twitter, label: 'Follow SmorX.ai on X (Twitter)', href: 'https://twitter.com/smorxai' },
+  { icon: Linkedin, label: 'Connect with SmorX.ai on LinkedIn', href: 'https://www.linkedin.com/company/smorxai' },
+  { icon: Github, label: 'SmorX.ai on GitHub', href: 'https://github.com/smorxai' },
+  { icon: Mail, label: 'Email SmorX.ai', href: 'mailto:outreach@smorx.ai' },
 ]
 
 export default function Footer() {
@@ -48,7 +50,7 @@ export default function Footer() {
   }
 
   return (
-    <footer style={{ background: '#04070F', borderTop: '1px solid rgba(255,255,255,0.05)' }}>
+    <footer aria-label="Site footer" style={{ background: '#04070F', borderTop: '1px solid rgba(255,255,255,0.05)' }}>
       {/* Pre-footer CTA */}
       <div className="relative overflow-hidden py-20" style={{ background: 'linear-gradient(135deg, rgba(124,58,237,0.06) 0%, rgba(59,130,246,0.04) 50%, rgba(6,182,212,0.04) 100%)' }}>
         <div className="bg-grid absolute inset-0 pointer-events-none opacity-30" />
@@ -82,6 +84,7 @@ export default function Footer() {
               className="btn-primary px-8 py-3.5 text-sm"
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.97 }}
+              aria-label="Book a strategy call with SmorX.ai"
             >
               Book Strategy Call <ArrowRight size={16} />
             </motion.button>
@@ -90,6 +93,7 @@ export default function Footer() {
               className="btn-outline px-8 py-3.5 text-sm"
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.97 }}
+              aria-label="Browse the AI agent marketplace"
             >
               Browse AI Agents
             </motion.button>
@@ -102,13 +106,16 @@ export default function Footer() {
         <div className="grid grid-cols-1 lg:grid-cols-6 gap-10">
           {/* Brand */}
           <div className="lg:col-span-2 flex flex-col gap-5">
-            <button onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })} className="w-fit">
+            <Link to="/" aria-label="SmorX.ai home" className="w-fit">
               <img
                 src="/smorx-logo.png"
-                alt="SmorX.ai"
+                alt="SmorX.ai — Enterprise AI Automation Platform"
                 className="h-20 w-auto object-contain"
+                width="160"
+                height="80"
+                loading="lazy"
               />
-            </button>
+            </Link>
             <p className="text-sm text-white/35 leading-relaxed max-w-xs">
               Autonomous AI systems, multi-agent workflows, and intelligent decision infrastructure for enterprise teams.
             </p>
@@ -118,35 +125,46 @@ export default function Footer() {
                   key={s.label}
                   href={s.href}
                   aria-label={s.label}
+                  rel="noopener noreferrer"
+                  target={s.href.startsWith('mailto') ? undefined : '_blank'}
                   className="w-8 h-8 rounded-lg flex items-center justify-center text-white/30 hover:text-white hover:bg-white/[0.06] transition-all duration-200 border border-white/[0.06] hover:border-white/15"
                 >
-                  <s.icon size={14} />
+                  <s.icon size={14} aria-hidden="true" />
                 </a>
               ))}
             </div>
             <div className="flex items-center gap-2 mt-1">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" aria-hidden="true" />
               <span className="text-xs text-white/30">All systems operational</span>
             </div>
           </div>
 
           {/* Links */}
           {Object.entries(FOOTER_LINKS).map(([section, links]) => (
-            <div key={section} className="flex flex-col gap-4">
-              <h4 className="text-xs font-semibold text-white/50 uppercase tracking-widest">{section}</h4>
-              <ul className="flex flex-col gap-2.5">
+            <nav key={section} aria-label={`${section} links`} className="flex flex-col gap-4">
+              <h3 className="text-xs font-semibold text-white/50 uppercase tracking-widest">{section}</h3>
+              <ul className="flex flex-col gap-2.5 list-none m-0 p-0">
                 {links.map(link => (
                   <li key={link.label}>
-                    <button
-                      onClick={() => scrollTo(link.href)}
-                      className="text-sm text-white/30 hover:text-white/70 transition-colors duration-150 text-left"
-                    >
-                      {link.display ?? link.label}
-                    </button>
+                    {link.scroll ? (
+                      <button
+                        onClick={() => scrollTo(link.href)}
+                        className="text-sm text-white/30 hover:text-white/70 transition-colors duration-150 text-left"
+                      >
+                        {link.label}
+                      </button>
+                    ) : (
+                      <Link
+                        to={link.href}
+                        className="text-sm text-white/30 hover:text-white/70 transition-colors duration-150"
+                      >
+                        {link.label}
+                      </Link>
+                    )}
                   </li>
                 ))}
               </ul>
-            </div>
+            </nav>
           ))}
         </div>
 

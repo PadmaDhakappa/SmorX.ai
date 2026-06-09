@@ -5,6 +5,7 @@ import { motion } from 'framer-motion'
 import AgentEconomics from '../components/visuals/AgentEconomics'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
+import SEO from '../components/SEO'
 
 const SECTIONS = [
   {
@@ -63,9 +64,25 @@ export default function ArticleAgentEconomics() {
 
   return (
     <div style={{ background: '#060A12', minHeight: '100vh' }}>
+      <SEO
+        title="The Economics of AI Agents: Cost, ROI, and Scale"
+        description="Most AI ROI calculations are incomplete. A practical framework for measuring the true value of autonomous agent deployments."
+        canonical="/blog/agent-economics"
+        type="article"
+        article={{
+          headline: 'The Economics of AI Agents: Cost, ROI, and Scale',
+          datePublished: '2026-05-05',
+          dateModified: '2026-05-12',
+        }}
+        breadcrumbs={[
+          { name: 'Home', path: '/' },
+          { name: 'Blog', path: '/#blog' },
+          { name: 'Agent Economics', path: '/blog/agent-economics' },
+        ]}
+      />
       <Navbar />
-
-      <div className="relative z-10 max-w-3xl mx-auto px-4 sm:px-6 pb-28 pt-32">
+      <main id="main-content">
+      <article className="relative z-10 max-w-3xl mx-auto px-4 sm:px-6 pb-28 pt-32">
 
         {/* Back link */}
         <motion.div variants={fadeUp} initial="hidden" animate="show" custom={0} className="mb-10">
@@ -182,7 +199,8 @@ export default function ArticleAgentEconomics() {
             Talk to us
           </Link>
         </motion.div>
-      </div>
+      </article>
+      </main>
 
       <Footer />
     </div>

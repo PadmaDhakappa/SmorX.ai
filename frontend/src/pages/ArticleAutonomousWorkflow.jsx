@@ -5,6 +5,7 @@ import { motion } from 'framer-motion'
 import AutonomousWorkflow from '../components/visuals/AutonomousWorkflow'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
+import SEO from '../components/SEO'
 
 const SECTIONS = [
   {
@@ -62,9 +63,25 @@ export default function ArticleAutonomousWorkflow() {
 
   return (
     <div style={{ background: '#060A12', minHeight: '100vh' }}>
+      <SEO
+        title="From AI Automation to Autonomous Enterprise Workflows"
+        description="Automation replaces tasks. Autonomy replaces processes. Here's the architectural shift enterprise teams need to understand."
+        canonical="/blog/autonomous-workflows"
+        type="article"
+        article={{
+          headline: 'From AI Automation to Autonomous Enterprise Workflows',
+          datePublished: '2026-04-20',
+          dateModified: '2026-05-12',
+        }}
+        breadcrumbs={[
+          { name: 'Home', path: '/' },
+          { name: 'Blog', path: '/#blog' },
+          { name: 'Autonomous Workflows', path: '/blog/autonomous-workflows' },
+        ]}
+      />
       <Navbar />
-
-      <div className="relative z-10 max-w-3xl mx-auto px-4 sm:px-6 pb-28 pt-32">
+      <main id="main-content">
+      <article className="relative z-10 max-w-3xl mx-auto px-4 sm:px-6 pb-28 pt-32">
 
         {/* Back link */}
         <motion.div variants={fadeUp} initial="hidden" animate="show" custom={0} className="mb-10">
@@ -181,7 +198,8 @@ export default function ArticleAutonomousWorkflow() {
             Talk to us
           </Link>
         </motion.div>
-      </div>
+      </article>
+      </main>
 
       <Footer />
     </div>

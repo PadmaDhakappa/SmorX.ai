@@ -5,6 +5,7 @@ import { motion } from 'framer-motion'
 import SecureAgentNetwork from '../components/visuals/SecureAgentNetwork'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
+import SEO from '../components/SEO'
 
 const SECTIONS = [
   {
@@ -74,9 +75,25 @@ export default function ArticleSecureAgents() {
 
   return (
     <div style={{ background: '#060A12', minHeight: '100vh' }}>
+      <SEO
+        title="Building Secure and Governed Agentic AI Systems"
+        description="Autonomous systems without guardrails are liabilities, not assets. Here's how to build enterprise AI with trust baked in."
+        canonical="/blog/secure-agents"
+        type="article"
+        article={{
+          headline: 'Building Secure and Governed Agentic AI Systems',
+          datePublished: '2026-05-01',
+          dateModified: '2026-05-12',
+        }}
+        breadcrumbs={[
+          { name: 'Home', path: '/' },
+          { name: 'Blog', path: '/#blog' },
+          { name: 'Secure AI Agents', path: '/blog/secure-agents' },
+        ]}
+      />
       <Navbar />
-
-      <div className="relative z-10 max-w-3xl mx-auto px-4 sm:px-6 pb-28 pt-32">
+      <main id="main-content">
+      <article className="relative z-10 max-w-3xl mx-auto px-4 sm:px-6 pb-28 pt-32">
 
         {/* Back link */}
         <motion.div variants={fadeUp} initial="hidden" animate="show" custom={0} className="mb-10">
@@ -193,7 +210,8 @@ export default function ArticleSecureAgents() {
             Talk to us
           </Link>
         </motion.div>
-      </div>
+      </article>
+      </main>
 
       <Footer />
     </div>

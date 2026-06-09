@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { Heart, Factory, Building2, ShoppingCart, Truck, Zap, Car, Shield } from 'lucide-react'
+import { Heart, Factory, Building2, Truck, Zap, Car, Shield, Cloud } from 'lucide-react'
 import SectionHeader from '../components/ui/SectionHeader'
 
 const INDUSTRIES = [
@@ -23,13 +23,6 @@ const INDUSTRIES = [
     color: '#3B82F6',
     useCases: ['Risk scoring AI', 'Fraud detection', 'Portfolio intelligence'],
     metric: '30% loss reduction',
-  },
-  {
-    icon: ShoppingCart,
-    label: 'Retail & E-commerce',
-    color: '#F97316',
-    useCases: ['Personalization engines', 'Demand forecasting', 'Customer AI agents'],
-    metric: '55% conversion lift',
   },
   {
     icon: Truck,
@@ -58,6 +51,13 @@ const INDUSTRIES = [
     color: '#6366F1',
     useCases: ['Threat intelligence AI', 'Surveillance automation', 'Anomaly detection'],
     metric: '60% faster response',
+  },
+  {
+    icon: Cloud,
+    label: 'SaaS',
+    color: '#A855F7',
+    useCases: ['Customer churn prediction', 'Product usage analytics', 'Onboarding workflow automation', 'Subscription intelligence AI'],
+    metric: '45% retention improvement',
   },
 ]
 
