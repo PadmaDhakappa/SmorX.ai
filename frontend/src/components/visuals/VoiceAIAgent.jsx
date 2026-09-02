@@ -100,7 +100,7 @@ export default function VoiceAIAgent({ className = '' }) {
 
         {/* Status pill */}
         <rect x="26%" y="57%" width="12%" height="5%" rx="2.5" fill="rgba(124,58,237,0.2)" stroke="#7C3AED" strokeWidth="0.3" strokeOpacity="0.6" />
-        <circle cx="28.5%" cy="59.5%" r="0.8" fill="#22D3EE">
+        <circle cx="28.5%" cy="59.5%" r="0.8" fill="#F59E0B">
           <animate attributeName="opacity" values="0.4;1;0.4" dur="1.5s" repeatCount="indefinite" />
         </circle>
         <text x="32%" y="60.2%" textAnchor="middle" fontSize="2" fill="rgba(255,255,255,0.7)" fontFamily="Inter,sans-serif">LIVE CALL</text>

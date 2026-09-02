@@ -5,6 +5,15 @@
 @tailwind utilities;
 
 @layer base {
+  :root {
+    /* Nav bar spacing rhythm — single source of truth, see Navbar.jsx / MegaMenu.jsx */
+    --nav-height: 64px;
+    --nav-item-gap: 4px;
+    --nav-cluster-gap: 24px;
+    --nav-item-padding-x: 10px;
+    --nav-item-padding-y: 8px;
+  }
+
   html { scroll-behavior: smooth; }
 
   body {
@@ -49,23 +58,31 @@
     border: 1px solid rgba(255,255,255,0.08);
   }
 
+  /* Fully opaque variant of glass-strong — same base hue (dark-200 / #0B1020),
+     no alpha, no blur, so floating panels (mega-menu dropdowns, mobile nav
+     accordion) never let page content bleed through behind them. */
+  .glass-solid {
+    background: #0B1020;
+    border: 1px solid rgba(255,255,255,0.08);
+  }
+
   /* ── Gradient Text ── */
   .gradient-text {
-    background: linear-gradient(135deg, #60A5FA 0%, #8B5CF6 50%, #06B6D4 100%);
+    background: linear-gradient(135deg, #5B9DFF 0%, #8B5CF6 50%, #06B6D4 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
 
   .gradient-text-blue-violet {
-    background: linear-gradient(135deg, #3B82F6 0%, #7C3AED 100%);
+    background: linear-gradient(135deg, #2F7FF6 0%, #7C3AED 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
 
   .gradient-text-cyan {
-    background: linear-gradient(135deg, #06B6D4 0%, #3B82F6 100%);
+    background: linear-gradient(135deg, #06B6D4 0%, #2F7FF6 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -75,14 +92,13 @@
   .btn-primary {
     @apply inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-semibold text-sm text-white
            transition-all duration-300 relative overflow-hidden
-           focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet-500/60;
-    background: linear-gradient(135deg, #3B82F6 0%, #7C3AED 60%, #06B6D4 100%);
-    background-size: 200% 200%;
-    box-shadow: 0 4px 24px rgba(124, 58, 237, 0.3);
+           focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cta/60;
+    background: #1F51FF;
+    box-shadow: 0 4px 24px rgba(31, 81, 255, 0.35);
   }
   .btn-primary:hover {
-    background-position: right center;
-    box-shadow: 0 8px 40px rgba(124, 58, 237, 0.5);
+    background: #133199;
+    box-shadow: 0 8px 40px rgba(31, 81, 255, 0.5);
     transform: translateY(-1px);
   }
   .btn-primary:active { transform: scale(0.98); }
@@ -95,6 +111,22 @@
     transition: opacity 0.3s;
   }
   .btn-primary:hover::after { opacity: 1; }
+
+  /* Color-only CTA treatment for buttons that need their own sizing
+     (e.g. AgentMarketplace's "Deploy This Agent") — same background/hover/
+     focus as .btn-primary without the baked-in padding/font-size, so CTA
+     color stays identical everywhere without shifting existing layouts. */
+  .btn-primary-fill {
+    @apply text-white font-semibold transition-all duration-300 relative overflow-hidden
+           focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-cta/60;
+    background: #1F51FF;
+    box-shadow: 0 4px 16px rgba(31, 81, 255, 0.3);
+  }
+  .btn-primary-fill:hover {
+    background: #133199;
+    box-shadow: 0 6px 24px rgba(31, 81, 255, 0.45);
+  }
+  .btn-primary-fill:active { transform: scale(0.98); }
 
   .btn-outline {
     @apply inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-semibold text-sm
@@ -112,6 +144,17 @@
     transform: translateY(-1px);
   }
   .btn-outline:active { transform: scale(0.98); }
+
+  /* ── Top-nav trigger (dropdown triggers + plain links) — single shared
+     style so every top-level item matches in size, color, and hover state ── */
+  .nav-trigger {
+    @apply flex items-center gap-1 rounded-lg text-sm text-white/55 whitespace-nowrap
+           hover:text-primary-light hover:bg-primary/[0.08] transition-all duration-200;
+    padding: var(--nav-item-padding-y) var(--nav-item-padding-x);
+  }
+  .nav-trigger-active {
+    @apply text-primary-light bg-primary/[0.08];
+  }
 
   /* ── Neon border card ── */
   .neon-card {

@@ -141,7 +141,7 @@ export default function Services() {
                   </p>
 
                   {/* Link */}
-                  <div className="flex items-center gap-1 text-sm font-medium text-white/30 group-hover:text-white/80 transition-colors">
+                  <div className="flex items-center gap-1 text-sm font-medium text-white/50 group-hover:text-white/80 transition-colors">
                     Learn more
                     <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" aria-hidden="true" />
                   </div>
@@ -153,7 +153,7 @@ export default function Services() {
 
         {/* Bottom CTA */}
         <div className="mt-16 text-center animate-on-scroll">
-          <p className="text-white/40 text-sm mb-4">Not sure which service you need?</p>
+          <p className="text-white/55 text-sm mb-4">Not sure which service you need?</p>
           <button
             onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
             className="btn-primary"

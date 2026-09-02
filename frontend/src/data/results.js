@@ -1,0 +1,82 @@
+import { TrendingUp, Activity, Building2, Heart } from 'lucide-react'
+
+const C = {
+  primary: '#2F7FF6', primaryLight: '#5B9DFF', violet: '#A78BFA',
+  cyan: '#06B6D4', cyanLight: '#22D3EE', success: '#10B981',
+  warning: '#F59E0B', rose: '#F43F5E', blue: '#3B82F6',
+}
+
+export const RESULTS_ITEMS = [
+  {
+    slug: 'impact-roi-metrics',
+    label: 'Impact & ROI Metrics',
+    icon: TrendingUp,
+    color: C.success,
+    gridDesc: 'Cost, productivity, and revenue gains from live deployments.',
+    tagline: 'The numbers behind every deployment, not just the pitch.',
+    overview: 'We track cost reduction, productivity gains, and revenue impact across every live deployment — the same metrics our clients report internally, not marketing estimates built before a system ever shipped.',
+    bullets: [
+      'Cost reduction tracked against pre-deployment baseline',
+      'Productivity gains measured in throughput, not just sentiment',
+      'Revenue impact attributed where agents directly influence outcomes',
+      'Metrics reviewed continuously post-launch, not just at go-live',
+    ],
+    useCase: "A client's operations team tracks a documented cost reduction over two quarters post-deployment, reviewed jointly in a quarterly business review.",
+    impactStat: 'Clients report up to 40% average productivity improvement across live deployments.',
+    ctaLabel: 'Talk to Us About Measuring Your ROI',
+  },
+  {
+    slug: 'deployment-timeline',
+    label: 'Deployment Timeline',
+    icon: Activity,
+    color: C.cyan,
+    gridDesc: 'Week 0 to Week 7 — scoping to production launch.',
+    tagline: 'A defined path from first conversation to production, not an open-ended engagement.',
+    overview: 'Every deployment follows the same disciplined timeline — opportunity mapping, MVP agent deployment, then full production launch — so you know what to expect and when, from the first call.',
+    bullets: [
+      'Week 0: AI opportunity mapping against your existing workflows',
+      'Week 3: MVP agent deployed against real tasks and real data',
+      'Week 7: Full production launch with monitoring and governance live',
+      'Team training and handoff built into the final phase',
+    ],
+    useCase: 'A first-time client goes from initial scoping call to a production agent handling real customer interactions in seven weeks, with a working MVP visible by week three.',
+    impactStat: 'Average time from scoping to production launch: 7 weeks.',
+    ctaLabel: 'Talk to Us About Your Deployment Timeline',
+  },
+  {
+    slug: 'case-studies',
+    label: 'Case Studies',
+    icon: Building2,
+    color: C.blue,
+    gridDesc: 'Manufacturing, Healthcare, Financial Services, E-commerce.',
+    tagline: 'Documented outcomes across the industries we work in most.',
+    overview: 'Our case studies cover manufacturing quality control, healthcare diagnostic support, financial risk intelligence, and e-commerce personalization — each with the specific problem, the agent architecture we deployed, and the measured result.',
+    bullets: [
+      'Manufacturing: quality-control and predictive maintenance agents',
+      'Healthcare: diagnostic support and documentation automation',
+      'Financial Services: risk intelligence and fraud detection',
+      'E-commerce: multi-agent personalization and recommendation engines',
+    ],
+    useCase: 'A prospective manufacturing client reviews a directly comparable case study — same industry, similar plant count — before scoping their own deployment.',
+    impactStat: 'Documented case studies span 4 industries with measurable, reviewed outcomes.',
+    ctaLabel: 'Talk to Us About a Similar Deployment',
+  },
+  {
+    slug: 'client-testimonials',
+    label: 'Client Testimonials',
+    icon: Heart,
+    color: C.rose,
+    gridDesc: 'What teams running these systems say, in their own words.',
+    tagline: 'Feedback from the people who use these systems daily, not just the executives who bought them.',
+    overview: 'We collect feedback directly from the operational teams running our deployed agents day to day — the people best positioned to judge whether a system actually works, not just whether it launched on schedule.',
+    bullets: [
+      'Direct feedback from operational teams, not just decision-makers',
+      'Reviewed and updated as deployments mature past launch',
+      'Covers both the deployment experience and ongoing system performance',
+      'Available by industry and use case on request',
+    ],
+    useCase: 'A prospective client requests a reference call with a similarly-sized company in their industry before finalizing a deployment decision.',
+    impactStat: 'Average client rating: 4.9/5 across 50+ enterprise teams.',
+    ctaLabel: 'Talk to Us and Request a Reference',
+  },
+]

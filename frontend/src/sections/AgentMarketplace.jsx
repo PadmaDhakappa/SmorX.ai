@@ -117,7 +117,7 @@ export default function AgentMarketplace() {
               <div className="p-5 flex flex-col gap-4 flex-1">
                 <div>
                   <h3 className="font-semibold text-white text-[15px] mb-1.5">{agent.title}</h3>
-                  <p className="text-xs text-white/45 leading-relaxed">{agent.desc}</p>
+                  <p className="text-xs text-white/50 leading-relaxed">{agent.desc}</p>
                 </div>
 
                 <ul className="flex flex-col gap-2 flex-1">
@@ -131,14 +131,7 @@ export default function AgentMarketplace() {
 
                 <button
                   onClick={() => document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' })}
-                  className="mt-2 w-full py-2.5 rounded-xl text-xs font-semibold transition-all duration-300"
-                  style={{
-                    background: `${agent.color}14`,
-                    border: `1px solid ${agent.color}28`,
-                    color: agent.color,
-                  }}
-                  onMouseEnter={e => { e.currentTarget.style.background = `${agent.color}22`; e.currentTarget.style.borderColor = `${agent.color}50` }}
-                  onMouseLeave={e => { e.currentTarget.style.background = `${agent.color}14`; e.currentTarget.style.borderColor = `${agent.color}28` }}
+                  className="mt-2 w-full py-2.5 rounded-xl text-xs btn-primary-fill"
                 >
                   Deploy This Agent
                 </button>

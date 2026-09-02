@@ -99,7 +99,7 @@ export default function ArticleSecureAgents() {
         <motion.div variants={fadeUp} initial="hidden" animate="show" custom={0} className="mb-10">
           <Link
             to="/"
-            className="inline-flex items-center gap-2 text-xs font-medium text-white/40 hover:text-white/80 transition-colors duration-200"
+            className="inline-flex items-center gap-2 text-xs font-medium text-white/55 hover:text-white/80 transition-colors duration-200"
           >
             <ArrowLeft size={13} /> Back to home
           </Link>
@@ -114,7 +114,7 @@ export default function ArticleSecureAgents() {
             style={{ color: '#22D3EE' }}>
             <Tag size={10} /> Security
           </span>
-          <span className="flex items-center gap-1.5 text-[11px] text-white/40">
+          <span className="flex items-center gap-1.5 text-[11px] text-white/55">
             <Clock size={10} /> 9 min read
           </span>
         </motion.div>
@@ -169,7 +169,7 @@ export default function ArticleSecureAgents() {
           <div className="rounded-2xl overflow-hidden" style={{ border: '1px solid rgba(255,255,255,0.07)' }}>
             <SecureAgentNetwork className="w-full" style={{ aspectRatio: '16/7' }} />
           </div>
-          <figcaption className="mt-3 px-4 sm:px-6 lg:px-16 text-[11px] text-white/30 text-center tracking-wide">
+          <figcaption className="mt-3 px-4 sm:px-6 lg:px-16 text-[11px] text-white/50 text-center tracking-wide">
             A governed agent architecture: Policy Engine at the top distributes rules downward through Permission Gates on the Trust Boundary; agents operate inside; all telemetry flows to the Audit Log with a feedback arc back to policy.
           </figcaption>
         </motion.figure>

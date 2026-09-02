@@ -16,9 +16,9 @@ export default {
           500: '#1A2440',
         },
         primary: {
-          DEFAULT: '#3B82F6',
+          DEFAULT: '#2F7FF6',
           dark: '#2563EB',
-          light: '#60A5FA',
+          light: '#5B9DFF',
         },
         violet: {
           DEFAULT: '#7C3AED',
@@ -39,10 +39,26 @@ export default {
           DEFAULT: '#6366F1',
           dark: '#4F46E5',
         },
+        cta: {
+          DEFAULT: '#1F51FF',
+          dark: '#133199',
+          light: '#7997FF',
+        },
+        success: {
+          DEFAULT: '#10B981',
+          light: '#34D399',
+          dark: '#059669',
+        },
+        warning: {
+          DEFAULT: '#F59E0B',
+          dark: '#D97706',
+        },
+        // Deprecated alias — kept only so any stray bg-accent/text-accent
+        // class (only in unrouted Services.jsx/About.jsx) doesn't break.
         accent: {
-          DEFAULT: '#F97316',
-          dark: '#EA580C',
-          light: '#FB923C',
+          DEFAULT: '#1F51FF',
+          dark: '#133199',
+          light: '#7997FF',
         },
         neon: {
           blue: '#00D4FF',
@@ -144,6 +160,7 @@ export default {
         'glow-cyan': '0 0 40px rgba(6, 182, 212, 0.3)',
         'neon-blue': '0 0 20px rgba(59, 130, 246, 0.5), 0 0 60px rgba(59, 130, 246, 0.2)',
         'neon-violet': '0 0 20px rgba(124, 58, 237, 0.5), 0 0 60px rgba(124, 58, 237, 0.2)',
+        'glow-cta': '0 0 40px rgba(31, 81, 255, 0.35)',
         'card': '0 4px 24px rgba(0,0,0,0.4), 0 1px 2px rgba(0,0,0,0.3)',
         'card-hover': '0 12px 48px rgba(0,0,0,0.5), 0 4px 16px rgba(0,0,0,0.3)',
       },

@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { motion, useInView } from 'framer-motion'
 import { TrendingDown, TrendingUp, Clock, MessageSquare, DollarSign } from 'lucide-react'
 import SectionHeader from '../components/ui/SectionHeader'
+import { COLORS } from '../theme/colors'
 
 const METRICS = [
   { icon: TrendingDown, value: 35, suffix: '%', label: 'Reduce Operational Costs', sublabel: 'average across enterprise deployments', color: '#7C3AED' },
@@ -72,19 +73,22 @@ export default function ImpactSection() {
                 style={{ background: `${m.color}14`, border: `1px solid ${m.color}28` }}>
                 <m.icon size={18} style={{ color: m.color }} />
               </div>
-              <div className="text-3xl lg:text-4xl font-bold" style={{ color: m.color }}>
+              <div
+                className="text-3xl lg:text-4xl font-bold"
+                style={{ color: COLORS.cyanLight, textShadow: `0 0 24px ${COLORS.cyanLight}59` }}
+              >
                 up to <CountUp target={m.value} suffix={m.suffix} />
               </div>
               <div>
                 <div className="text-sm font-semibold text-white leading-snug">{m.label}</div>
-                <div className="text-xs text-white/35 mt-1">{m.sublabel}</div>
+                <div className="text-xs text-white/50 mt-1">{m.sublabel}</div>
               </div>
             </motion.div>
           ))}
         </div>
 
         {/* Timeline */}
-        <div className="relative">
+        <div id="impact-timeline" className="relative">
           <div className="text-center mb-10">
             <span className="section-label">Deployment Timeline</span>
           </div>
@@ -114,9 +118,9 @@ export default function ImpactSection() {
                 </div>
 
                 <div>
-                  <div className="text-xs font-semibold text-white/40 mb-1">{step.week}</div>
+                  <div className="text-xs font-semibold text-white/55 mb-1">{step.week}</div>
                   <div className="font-semibold text-white text-sm mb-2">{step.label}</div>
-                  <p className="text-xs text-white/40 leading-relaxed max-w-[200px] mx-auto">{step.desc}</p>
+                  <p className="text-xs text-white/55 leading-relaxed max-w-[200px] mx-auto">{step.desc}</p>
                 </div>
               </motion.div>
             ))}

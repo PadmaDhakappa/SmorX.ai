@@ -32,7 +32,7 @@ export default function NotFound() {
             Page Not Found
           </h1>
 
-          <p className="text-white/40 text-base leading-relaxed max-w-sm">
+          <p className="text-white/55 text-base leading-relaxed max-w-sm">
             The page you&apos;re looking for doesn&apos;t exist or has been moved.
             Let&apos;s get you back on track.
           </p>
@@ -54,7 +54,7 @@ export default function NotFound() {
             </Link>
           </div>
 
-          <div className="mt-10 flex flex-col items-center gap-3 text-sm text-white/30">
+          <div className="mt-10 flex flex-col items-center gap-3 text-sm text-white/50">
             <p className="flex items-center gap-1.5">
               <FileText size={13} />
               Explore our latest insights:

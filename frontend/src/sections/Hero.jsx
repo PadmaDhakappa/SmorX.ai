@@ -148,7 +148,7 @@ export default function Hero() {
       {/* Scroll indicator */}
       <motion.button
         onClick={() => scrollTo('#control-plane')}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-white/25 hover:text-white/50 transition-colors cursor-pointer"
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-white/50 hover:text-white/70 transition-colors cursor-pointer"
         animate={{ y: [0, 6, 0] }}
         transition={{ duration: 2.2, repeat: Infinity, ease: 'easeInOut' }}
         aria-label="Scroll to next section"

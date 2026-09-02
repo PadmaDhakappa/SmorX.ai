@@ -118,7 +118,7 @@ export default function About() {
                   </div>
                   <div>
                     <h3 className="text-white font-semibold mb-1.5 text-sm">{title}</h3>
-                    <p className="text-white/45 text-sm leading-relaxed">{body}</p>
+                    <p className="text-white/50 text-sm leading-relaxed">{body}</p>
                   </div>
                 </div>
               </div>
@@ -137,7 +137,7 @@ export default function About() {
                 <Icon className={`w-5 h-5 ${color}`} aria-hidden="true" />
               </div>
               <div className={`text-3xl font-bold ${color} mb-1 tracking-tight`}>{value}</div>
-              <div className="text-white/35 text-xs">{label}</div>
+              <div className="text-white/50 text-xs">{label}</div>
             </div>
           ))}
         </div>

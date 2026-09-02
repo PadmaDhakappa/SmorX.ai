@@ -2,6 +2,7 @@ import { motion } from 'framer-motion'
 import { GitBranch, Database, Shield, Activity, Plug, Brain } from 'lucide-react'
 import SectionHeader from '../components/ui/SectionHeader'
 import ControlPlaneDiagram from '../components/visuals/ControlPlaneDiagram'
+import { COLORS } from '../theme/colors'
 
 const NODES = [
   {
@@ -95,12 +96,12 @@ function NodeCard({ node, index }) {
         <h3 className="font-semibold text-white text-sm">{node.title}</h3>
       </div>
 
-      <p className="text-xs text-white/45 leading-relaxed">{node.desc}</p>
+      <p className="text-xs text-white/50 leading-relaxed">{node.desc}</p>
 
-      {/* Animated connection dot */}
+      {/* Animated connection dot — success green, regardless of card's own accent color */}
       <div className="flex items-center gap-1.5 mt-auto">
-        <span className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ background: node.color }} />
-        <span className="text-[10px] font-medium" style={{ color: node.color }}>Connected</span>
+        <span className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ background: COLORS.success }} />
+        <span className="text-[10px] font-medium" style={{ color: COLORS.success }}>Connected</span>
       </div>
     </motion.div>
   )

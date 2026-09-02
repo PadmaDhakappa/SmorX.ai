@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import { Heart, Factory, Building2, Truck, Zap, Car, Shield, Cloud } from 'lucide-react'
+import { Heart, Factory, Building2, Truck, Zap, Car, Shield, ShoppingBag } from 'lucide-react'
 import SectionHeader from '../components/ui/SectionHeader'
 
 const INDUSTRIES = [
@@ -48,16 +48,16 @@ const INDUSTRIES = [
   {
     icon: Shield,
     label: 'Security & Defense',
-    color: '#6366F1',
+    color: '#818CF8', // indigo-400 — base #6366F1 fails 4.5:1 as badge text on dark bg (4.35:1)
     useCases: ['Threat intelligence AI', 'Surveillance automation', 'Anomaly detection'],
     metric: '60% faster response',
   },
   {
-    icon: Cloud,
-    label: 'SaaS',
-    color: '#A855F7',
-    useCases: ['Customer churn prediction', 'Product usage analytics', 'Onboarding workflow automation', 'Subscription intelligence AI'],
-    metric: '45% retention improvement',
+    icon: ShoppingBag,
+    label: 'Retail',
+    color: '#5B9DFF',
+    useCases: ['Demand forecasting AI', 'Inventory optimization', 'Personalized recommendations'],
+    metric: '25% fewer stockouts',
   },
 ]
 
@@ -110,7 +110,7 @@ export default function IndustriesSection() {
               {/* Use cases */}
               <ul className="flex flex-col gap-1.5">
                 {ind.useCases.map(uc => (
-                  <li key={uc} className="flex items-start gap-2 text-xs text-white/40">
+                  <li key={uc} className="flex items-start gap-2 text-xs text-white/55">
                     <span className="mt-1.5 w-1 h-1 rounded-full flex-shrink-0" style={{ background: ind.color, opacity: 0.6 }} />
                     {uc}
                   </li>
@@ -120,7 +120,7 @@ export default function IndustriesSection() {
               {/* Metric */}
               <div className="mt-auto">
                 <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[10px] font-semibold"
-                  style={{ background: `${ind.color}12`, border: `1px solid ${ind.color}25`, color: ind.color }}>
+                  style={{ background: `${ind.color}12`, border: `1px solid ${ind.color}25`, color: ind.color, boxShadow: `0 0 14px ${ind.color}30` }}>
                   ↑ {ind.metric}
                 </span>
               </div>

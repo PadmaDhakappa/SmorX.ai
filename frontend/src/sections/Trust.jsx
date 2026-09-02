@@ -10,7 +10,7 @@ const TESTIMONIALS = [
     company: 'FinTech Scale-up',
     quote: <><BrandName /> deployed a fraud detection agent that reduced our false positives by 73% within the first month. The speed of delivery was unlike any vendor engagement we&apos;ve had.</>,
     metric: '87% faster detection',
-    metricColor: '#7C3AED',
+    metricColor: '#A78BFA', // violet-bright — base #7C3AED fails 4.5:1 as text on dark bg (3.48:1)
     initials: 'SC',
     gradient: 'from-violet-500 to-blue-500',
     stars: 5,
@@ -82,7 +82,7 @@ export default function Trust() {
 
               {/* Metric badge */}
               <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold w-fit"
-                style={{ background: `${t.metricColor}12`, border: `1px solid ${t.metricColor}28`, color: t.metricColor }}>
+                style={{ background: `${t.metricColor}12`, border: `1px solid ${t.metricColor}28`, color: t.metricColor, boxShadow: `0 0 14px ${t.metricColor}30` }}>
                 ↑ {t.metric}
               </span>
 
@@ -96,7 +96,7 @@ export default function Trust() {
                 </div>
                 <div>
                   <div className="text-sm font-semibold text-white">{t.name}</div>
-                  <div className="text-xs text-white/35">{t.role}, {t.company}</div>
+                  <div className="text-xs text-white/50">{t.role}, {t.company}</div>
                 </div>
               </div>
             </motion.div>
@@ -117,9 +117,9 @@ export default function Trust() {
               <span className="ml-1.5 text-white font-semibold text-sm">4.9</span>
             </div>
             <div className="h-4 w-px bg-white/10" />
-            <span className="text-white/40 text-sm">Rated by 50+ enterprise teams</span>
+            <span className="text-white/55 text-sm">Rated by 50+ enterprise teams</span>
             <div className="h-4 w-px bg-white/10" />
-            <span className="text-white/40 text-sm">Avg. deployment: 7 weeks</span>
+            <span className="text-white/55 text-sm">Avg. deployment: 7 weeks</span>
           </div>
         </motion.div>
       </div>

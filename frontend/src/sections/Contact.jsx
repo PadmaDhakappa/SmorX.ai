@@ -51,7 +51,7 @@ export default function Contact() {
   }
 
   const inputCls = (field) =>
-    `w-full px-4 py-3 rounded-xl text-sm text-white placeholder-white/25 transition-all duration-200 outline-none bg-white/[0.04] border ${
+    `w-full px-4 py-3 rounded-xl text-sm text-white placeholder-white/50 transition-all duration-200 outline-none bg-white/[0.04] border ${
       errors[field]
         ? 'border-red-500/50 focus:border-red-500/70'
         : 'border-white/[0.08] focus:border-violet-500/50 focus:bg-white/[0.06]'
@@ -83,7 +83,7 @@ export default function Contact() {
                   icon: Calendar,
                   title: 'Book Strategy Call',
                   desc: '30-minute call with an AI architect. We map your workflow and suggest the right solution.',
-                  color: '#7C3AED',
+                  color: '#A78BFA', // violet-bright — base #7C3AED fails 4.5:1 as text on dark bg (3.48:1)
                   action: 'Schedule Now',
                 },
                 {
@@ -108,7 +108,7 @@ export default function Contact() {
                   </div>
                   <div>
                     <div className="font-semibold text-white text-sm mb-1">{card.title}</div>
-                    <p className="text-xs text-white/40 leading-relaxed">{card.desc}</p>
+                    <p className="text-xs text-white/55 leading-relaxed">{card.desc}</p>
                   </div>
                   <button
                     className="flex items-center gap-1 text-xs font-semibold mt-1 transition-opacity duration-200 hover:opacity-80"
@@ -130,8 +130,8 @@ export default function Contact() {
             >
               {[
                 { icon: Mail, label: 'Email', value: 'outreach@smorx.ai', note: 'Responds within 4 hours' },
-                { icon: Phone, label: 'Phone', value: '+91 8147681616', note: 'Mon–Fri, 9am–6pm IST' },
-                { icon: MapPin, label: 'Office', value: 'Bangalore, India', note: 'Remote-first, global delivery' },
+                { icon: Phone, label: 'Phone', value: '+91 8147681616', note: 'Round-the-clock, borderless support' },
+                { icon: MapPin, label: 'Office', value: 'BHive Premium, Bellandur, Outer Ring Road, Bangalore', note: 'Local roots, global reach,serving clients across time zones' },
               ].map(item => (
                 <div key={item.label} className="flex items-start gap-3.5">
                   <div className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0"
@@ -139,9 +139,9 @@ export default function Contact() {
                     <item.icon size={14} className="text-violet-400" />
                   </div>
                   <div>
-                    <div className="text-xs text-white/30 mb-0.5">{item.label}</div>
+                    <div className="text-xs text-white/50 mb-0.5">{item.label}</div>
                     <div className="text-sm text-white font-medium">{item.value}</div>
-                    <div className="text-[11px] text-white/30 mt-0.5">{item.note}</div>
+                    <div className="text-[11px] text-white/50 mt-0.5">{item.note}</div>
                   </div>
                 </div>
               ))}
@@ -164,7 +164,7 @@ export default function Contact() {
                 </div>
                 <div>
                   <h3 className="text-xl font-bold text-white mb-2">Message Received</h3>
-                  <p className="text-sm text-white/45">We'll respond within 4 hours with a tailored recommendation.</p>
+                  <p className="text-sm text-white/50">We'll respond within 4 hours with a tailored recommendation.</p>
                 </div>
                 <button onClick={() => { setStatus('idle'); setForm(INITIAL_FORM) }} className="btn-outline text-sm px-6 py-2.5">
                   Send Another
@@ -174,14 +174,14 @@ export default function Contact() {
               <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-5" aria-label="Contact SmorX.ai">
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <label htmlFor="contact-name" className="block text-xs text-white/45 mb-1.5 font-medium">Name *</label>
+                    <label htmlFor="contact-name" className="block text-xs text-white/50 mb-1.5 font-medium">Name *</label>
                     <input id="contact-name" name="name" value={form.name} onChange={handleChange}
                       placeholder="Jane Smith" className={inputCls('name')} aria-required="true"
                       aria-invalid={!!errors.name} aria-describedby={errors.name ? 'err-name' : undefined} />
                     {errors.name && <p id="err-name" role="alert" className="text-xs text-red-400 mt-1">{errors.name}</p>}
                   </div>
                   <div>
-                    <label htmlFor="contact-email" className="block text-xs text-white/45 mb-1.5 font-medium">Email *</label>
+                    <label htmlFor="contact-email" className="block text-xs text-white/50 mb-1.5 font-medium">Email *</label>
                     <input id="contact-email" name="email" type="email" value={form.email} onChange={handleChange}
                       placeholder="jane@company.com" className={inputCls('email')} aria-required="true"
                       aria-invalid={!!errors.email} aria-describedby={errors.email ? 'err-email' : undefined} />
@@ -190,13 +190,13 @@ export default function Contact() {
                 </div>
 
                 <div>
-                  <label htmlFor="contact-phone" className="block text-xs text-white/45 mb-1.5 font-medium">Company / Phone</label>
+                  <label htmlFor="contact-phone" className="block text-xs text-white/50 mb-1.5 font-medium">Company / Phone</label>
                   <input id="contact-phone" name="phone" value={form.phone} onChange={handleChange}
                     placeholder="Acme Corp or +1 555 000 0000" className={inputCls('phone')} />
                 </div>
 
                 <div>
-                  <label htmlFor="contact-message" className="block text-xs text-white/45 mb-1.5 font-medium">Tell us about your workflow *</label>
+                  <label htmlFor="contact-message" className="block text-xs text-white/50 mb-1.5 font-medium">Tell us about your workflow *</label>
                   <textarea id="contact-message" name="message" rows={5} value={form.message} onChange={handleChange}
                     placeholder="Describe the process you'd like to automate or the AI system you're looking to build..."
                     className={`${inputCls('message')} resize-none`} aria-required="true"
@@ -225,7 +225,7 @@ export default function Contact() {
                   )}
                 </motion.button>
 
-                <p className="text-[11px] text-white/25 text-center">
+                <p className="text-[11px] text-white/50 text-center">
                   No spam. We respond with a tailored recommendation, not a sales deck.
                 </p>
               </form>

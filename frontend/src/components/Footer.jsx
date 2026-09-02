@@ -2,37 +2,7 @@ import { motion } from 'framer-motion'
 import { Twitter, Linkedin, Github, Mail, ArrowRight } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import BrandName from './BrandName'
-
-const FOOTER_LINKS = {
-  Company: [
-    { label: 'About SmorX', href: '#home', scroll: true },
-    { label: 'Our Mission', href: '#home', scroll: true },
-    { label: 'Careers', href: '#contact', scroll: true },
-    { label: 'Blog', href: '#blog', scroll: true },
-  ],
-  Solutions: [
-    { label: 'Agentic Workflows', href: '#services', scroll: true },
-    { label: 'Multi-Agent Systems', href: '#services', scroll: true },
-    { label: 'AI Control Plane', href: '#control-plane', scroll: true },
-    { label: 'Agent Marketplace', href: '#agents', scroll: true },
-    { label: 'Data Intelligence', href: '#services', scroll: true },
-  ],
-  Industries: [
-    { label: 'Healthcare', href: '#industries', scroll: true },
-    { label: 'Financial Services', href: '#industries', scroll: true },
-    { label: 'Manufacturing', href: '#industries', scroll: true },
-    { label: 'Retail & E-commerce', href: '#industries', scroll: true },
-    { label: 'Logistics', href: '#industries', scroll: true },
-    { label: 'SaaS', href: '#industries', scroll: true },
-  ],
-  Insights: [
-    { label: 'Multi-Agent Systems', href: '/blog/multi-agent-systems', scroll: false },
-    { label: 'Autonomous Workflows', href: '/blog/autonomous-workflows', scroll: false },
-    { label: 'AI Control Planes', href: '/blog/ai-control-planes', scroll: false },
-    { label: 'AI Agents vs Software', href: '/blog/agents-vs-software', scroll: false },
-    { label: 'Secure AI Agents', href: '/blog/secure-agents', scroll: false },
-  ],
-}
+import { FOOTER_GROUPS } from '../data/navigation'
 
 const SOCIAL = [
   { icon: Twitter, label: 'Follow SmorX.ai on X (Twitter)', href: 'https://twitter.com/smorxai' },
@@ -67,7 +37,7 @@ export default function Footer() {
               Your AI operating layer<br />
               <span className="gradient-text">starts here.</span>
             </h2>
-            <p className="text-white/45 text-base max-w-xl mx-auto">
+            <p className="text-white/50 text-base max-w-xl mx-auto">
               Join 50+ enterprises that have transformed their operations with <BrandName /> AI systems. First agent live in 3 weeks.
             </p>
           </motion.div>
@@ -116,7 +86,7 @@ export default function Footer() {
                 loading="lazy"
               />
             </Link>
-            <p className="text-sm text-white/35 leading-relaxed max-w-xs">
+            <p className="text-sm text-white/50 leading-relaxed max-w-xs">
               Autonomous AI systems, multi-agent workflows, and intelligent decision infrastructure for enterprise teams.
             </p>
             <div className="flex items-center gap-2">
@@ -127,7 +97,7 @@ export default function Footer() {
                   aria-label={s.label}
                   rel="noopener noreferrer"
                   target={s.href.startsWith('mailto') ? undefined : '_blank'}
-                  className="w-8 h-8 rounded-lg flex items-center justify-center text-white/30 hover:text-white hover:bg-white/[0.06] transition-all duration-200 border border-white/[0.06] hover:border-white/15"
+                  className="w-8 h-8 rounded-lg flex items-center justify-center text-white/50 hover:text-white hover:bg-white/[0.06] transition-all duration-200 border border-white/[0.06] hover:border-white/15"
                 >
                   <s.icon size={14} aria-hidden="true" />
                 </a>
@@ -135,12 +105,12 @@ export default function Footer() {
             </div>
             <div className="flex items-center gap-2 mt-1">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" aria-hidden="true" />
-              <span className="text-xs text-white/30">All systems operational</span>
+              <span className="text-xs text-white/50">All systems operational</span>
             </div>
           </div>
 
           {/* Links */}
-          {Object.entries(FOOTER_LINKS).map(([section, links]) => (
+          {Object.entries(FOOTER_GROUPS).map(([section, links]) => (
             <nav key={section} aria-label={`${section} links`} className="flex flex-col gap-4">
               <h3 className="text-xs font-semibold text-white/50 uppercase tracking-widest">{section}</h3>
               <ul className="flex flex-col gap-2.5 list-none m-0 p-0">
@@ -149,14 +119,14 @@ export default function Footer() {
                     {link.scroll ? (
                       <button
                         onClick={() => scrollTo(link.href)}
-                        className="text-sm text-white/30 hover:text-white/70 transition-colors duration-150 text-left"
+                        className="text-sm text-white/50 hover:text-white/70 transition-colors duration-150 text-left"
                       >
                         {link.label}
                       </button>
                     ) : (
                       <Link
                         to={link.href}
-                        className="text-sm text-white/30 hover:text-white/70 transition-colors duration-150"
+                        className="text-sm text-white/50 hover:text-white/70 transition-colors duration-150"
                       >
                         {link.label}
                       </Link>
@@ -170,10 +140,10 @@ export default function Footer() {
 
         {/* Bottom bar */}
         <div className="mt-14 pt-6 border-t border-white/[0.05] flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-xs text-white/20">© 2025 <BrandName suffix=".ai" />. All rights reserved. Transforming Vision into Intelligent Systems.</p>
+          <p className="text-xs text-white/50">© 2025 <BrandName suffix=".ai" />. All rights reserved. Transforming Vision into Intelligent Systems.</p>
           <div className="flex items-center gap-5">
             {['Privacy Policy', 'Terms of Service', 'Cookie Policy'].map(t => (
-              <button key={t} className="text-xs text-white/20 hover:text-white/40 transition-colors">{t}</button>
+              <button key={t} className="text-xs text-white/50 hover:text-white/70 transition-colors">{t}</button>
             ))}
           </div>
         </div>

@@ -87,7 +87,7 @@ export default function ArticleAutonomousWorkflow() {
         <motion.div variants={fadeUp} initial="hidden" animate="show" custom={0} className="mb-10">
           <Link
             to="/"
-            className="inline-flex items-center gap-2 text-xs font-medium text-white/40 hover:text-white/80 transition-colors duration-200"
+            className="inline-flex items-center gap-2 text-xs font-medium text-white/55 hover:text-white/80 transition-colors duration-200"
           >
             <ArrowLeft size={13} /> Back to home
           </Link>
@@ -102,7 +102,7 @@ export default function ArticleAutonomousWorkflow() {
             style={{ color: '#3B82F6' }}>
             <Tag size={10} /> Strategy
           </span>
-          <span className="flex items-center gap-1.5 text-[11px] text-white/40">
+          <span className="flex items-center gap-1.5 text-[11px] text-white/55">
             <Clock size={10} /> 5 min read
           </span>
         </motion.div>
@@ -157,7 +157,7 @@ export default function ArticleAutonomousWorkflow() {
           <div className="rounded-2xl overflow-hidden" style={{ border: '1px solid rgba(255,255,255,0.07)' }}>
             <AutonomousWorkflow className="w-full" style={{ aspectRatio: '16/7' }} />
           </div>
-          <figcaption className="mt-3 px-4 sm:px-6 lg:px-16 text-[11px] text-white/30 text-center tracking-wide">
+          <figcaption className="mt-3 px-4 sm:px-6 lg:px-16 text-[11px] text-white/50 text-center tracking-wide">
             Left: a rigid linear automation pipeline. Right: an autonomous mesh with reasoning nodes, adaptive branching, and feedback arcs that loop outcomes back into the process.
           </figcaption>
         </motion.figure>

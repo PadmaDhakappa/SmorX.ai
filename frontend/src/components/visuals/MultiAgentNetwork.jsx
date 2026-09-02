@@ -185,7 +185,7 @@ export default function MultiAgentNetwork({ className = '' }) {
           ].map(m => (
             <div key={m.label} className="flex items-center gap-2">
               <span className="w-2 h-2 rounded-full flex-shrink-0" style={{ background: m.color, boxShadow: `0 0 6px ${m.color}` }} />
-              <span className="text-xs text-white/40">{m.label}:</span>
+              <span className="text-xs text-white/55">{m.label}:</span>
               <span className="text-sm font-bold" style={{ color: m.color }}>{m.value}</span>
             </div>
           ))}

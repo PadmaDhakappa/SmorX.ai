@@ -3,6 +3,11 @@ import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import Hero from '../sections/Hero'
 import SEO from '../components/SEO'
+import PlatformTeaser from '../sections/teasers/PlatformTeaser'
+import CapabilitiesTeaser from '../sections/teasers/CapabilitiesTeaser'
+import SolutionsTeaser from '../sections/teasers/SolutionsTeaser'
+import MarketplaceTeaser from '../sections/teasers/MarketplaceTeaser'
+import ResultsTeaser from '../sections/teasers/ResultsTeaser'
 
 const ControlPlane = lazy(() => import('../sections/ControlPlane'))
 const AIServicesSection = lazy(() => import('../sections/AIServicesSection'))
@@ -62,6 +67,17 @@ export default function Home() {
       <main id="main-content">
         <Hero />
 
+        <section className="relative py-14 overflow-hidden" style={{ background: '#060A12' }}>
+          <div className="bg-grid absolute inset-0 pointer-events-none opacity-30" />
+          <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col gap-3">
+            <PlatformTeaser />
+            <CapabilitiesTeaser />
+            <SolutionsTeaser />
+            <MarketplaceTeaser />
+            <ResultsTeaser />
+          </div>
+        </section>
+
         <Suspense fallback={<SectionLoader />}>
           <ControlPlane />
         </Suspense>
@@ -87,11 +103,11 @@ export default function Home() {
         </Suspense>
 
         <Suspense fallback={<SectionLoader />}>
-          <BlogSection />
+          <Trust />
         </Suspense>
 
         <Suspense fallback={<SectionLoader />}>
-          <Trust />
+          <BlogSection />
         </Suspense>
 
         <Suspense fallback={<SectionLoader />}>

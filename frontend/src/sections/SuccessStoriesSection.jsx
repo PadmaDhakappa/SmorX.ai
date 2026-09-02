@@ -62,7 +62,7 @@ const STORIES = [
       { value: '3×', label: 'Repeat Engagement' },
     ],
     Visual: EcommerceAI,
-    color: '#F97316',
+    color: '#A855F7',
   },
 ]
 
@@ -114,11 +114,11 @@ export default function SuccessStoriesSection() {
                 <h3 className="font-bold text-white text-base leading-snug">{story.title}</h3>
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <div className="text-[10px] font-semibold text-white/30 uppercase tracking-wider mb-1.5">Problem</div>
+                    <div className="text-[10px] font-semibold text-white/50 uppercase tracking-wider mb-1.5">Problem</div>
                     <p className="text-xs text-white/50 leading-relaxed">{story.problem}</p>
                   </div>
                   <div>
-                    <div className="text-[10px] font-semibold text-white/30 uppercase tracking-wider mb-1.5">Solution</div>
+                    <div className="text-[10px] font-semibold text-white/50 uppercase tracking-wider mb-1.5">Solution</div>
                     <p className="text-xs text-white/50 leading-relaxed">{story.solution}</p>
                   </div>
                 </div>
@@ -127,19 +127,17 @@ export default function SuccessStoriesSection() {
                 <div className="grid grid-cols-3 gap-3 mt-auto">
                   {story.metrics.map(m => (
                     <div key={m.label} className="rounded-xl p-3 text-center"
-                      style={{ background: `${story.color}0C`, border: `1px solid ${story.color}20` }}>
-                      <div className="text-xl font-bold mb-0.5" style={{ color: story.color }}>{m.value}</div>
-                      <div className="text-[10px] text-white/35 leading-tight">{m.label}</div>
+                      style={{ background: `${story.color}0C`, border: `1px solid ${story.color}20`, boxShadow: `0 0 16px ${story.color}26` }}>
+                      <div className="text-xl font-bold mb-0.5" style={{ color: story.color, textShadow: `0 0 12px ${story.color}40` }}>{m.value}</div>
+                      <div className="text-[10px] text-white/50 leading-tight">{m.label}</div>
                     </div>
                   ))}
                 </div>
 
                 <button
                   onClick={() => document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' })}
-                  className="flex items-center gap-1.5 text-xs font-medium transition-colors duration-200 mt-1"
-                  style={{ color: `${story.color}80` }}
-                  onMouseEnter={e => e.currentTarget.style.color = story.color}
-                  onMouseLeave={e => e.currentTarget.style.color = `${story.color}80`}
+                  className="flex items-center gap-1.5 text-xs font-medium hover:underline mt-1"
+                  style={{ color: story.color }}
                 >
                   Get a similar outcome <ArrowUpRight size={12} />
                 </button>

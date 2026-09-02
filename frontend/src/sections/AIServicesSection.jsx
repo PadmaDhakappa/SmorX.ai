@@ -95,7 +95,7 @@ export default function AIServicesSection() {
               {/* Content */}
               <div className="flex flex-col gap-2">
                 <h3 className="font-semibold text-white text-[15px] leading-snug">{svc.title}</h3>
-                <p className="text-sm text-white/45 leading-relaxed">{svc.desc}</p>
+                <p className="text-sm text-white/50 leading-relaxed">{svc.desc}</p>
               </div>
 
               {/* Tags */}

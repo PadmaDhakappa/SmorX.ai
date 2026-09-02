@@ -134,7 +134,7 @@ export default function BlogSection() {
               <div className="p-5 flex flex-col gap-3 flex-1">
                 <div className="flex items-center justify-between">
                   <span className="tag-chip">{post.tag}</span>
-                  <div className="flex items-center gap-1 text-[10px] text-white/30">
+                  <div className="flex items-center gap-1 text-[10px] text-white/50">
                     <Clock size={10} />
                     {post.readTime}
                   </div>
@@ -147,7 +147,7 @@ export default function BlogSection() {
                     </Link>
                   ) : post.title}
                 </h3>
-                <p className="text-xs text-white/40 leading-relaxed flex-1">{post.excerpt}</p>
+                <p className="text-xs text-white/55 leading-relaxed flex-1">{post.excerpt}</p>
 
                 {POST_LINKS[i] ? (
                   <Link

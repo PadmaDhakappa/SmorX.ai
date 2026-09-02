@@ -96,7 +96,7 @@ export default function ArticleAgentsVsSoftware() {
         <motion.div variants={fadeUp} initial="hidden" animate="show" custom={0} className="mb-10">
           <Link
             to="/"
-            className="inline-flex items-center gap-2 text-xs font-medium text-white/40 hover:text-white/80 transition-colors duration-200"
+            className="inline-flex items-center gap-2 text-xs font-medium text-white/55 hover:text-white/80 transition-colors duration-200"
           >
             <ArrowLeft size={13} /> Back to home
           </Link>
@@ -111,7 +111,7 @@ export default function ArticleAgentsVsSoftware() {
             style={{ color: '#A78BFA' }}>
             <Tag size={10} /> Comparison
           </span>
-          <span className="flex items-center gap-1.5 text-[11px] text-white/40">
+          <span className="flex items-center gap-1.5 text-[11px] text-white/55">
             <Clock size={10} /> 8 min read
           </span>
         </motion.div>
@@ -166,7 +166,7 @@ export default function ArticleAgentsVsSoftware() {
           <div className="rounded-2xl overflow-hidden" style={{ border: '1px solid rgba(255,255,255,0.07)' }}>
             <AgentsVsSoftware className="w-full" style={{ aspectRatio: '16/7' }} />
           </div>
-          <figcaption className="mt-3 px-4 sm:px-6 lg:px-16 text-[11px] text-white/30 text-center tracking-wide">
+          <figcaption className="mt-3 px-4 sm:px-6 lg:px-16 text-[11px] text-white/50 text-center tracking-wide">
             Left: traditional software as a deterministic grid — fixed inputs, rigid logic, defined outputs. Right: an AI agent cluster with a reasoning core, planner, memory, tools, executor, and feedback arcs that close the loop.
           </figcaption>
         </motion.figure>

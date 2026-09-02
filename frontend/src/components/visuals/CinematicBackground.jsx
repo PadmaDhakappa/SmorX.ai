@@ -16,7 +16,7 @@ const NODE_COUNT = 14
 const STREAM_COUNT = 60
 const ACCENT = {
   violet: [124, 58, 237],
-  blue: [59, 130, 246],
+  blue: [47, 127, 246],
   cyan: [6, 182, 212],
   brightCyan: [34, 211, 238],
 }
